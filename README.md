@@ -1,1 +1,1 @@
-# react-ojt
+# React-OJT
