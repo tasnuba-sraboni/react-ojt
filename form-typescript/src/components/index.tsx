@@ -11,9 +11,9 @@ const FormApp: React.FC = () => {
       <div>
         <Header />
       </div>
+
       <div>
         <Routes>
-          <Route element={<SearchBar />} path="/" />
           <Route element={<OrderList />} path="/" />
           <Route element={<AddOrder />} path="/add-order" />
         </Routes>
