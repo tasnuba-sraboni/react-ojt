@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -13,26 +14,48 @@ const useStyles = makeStyles((theme) => ({
     justifyItems: "center",
   },
   root: {
-    width: "50%",
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
       width: "25ch",
     },
   },
+  inputField: {
+    border: "1px solid #C9BB8E",
+
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "40px",
+    justifyContent: "space-around",
+    padding: "40px",
+    boxShadow: "0 0 10px 1200px rgba(0, 0, 0, 0.5)",
+  },
   backButton: {
-    width: "10%",
+    marginLeft: "86%",
     height: "30px",
-    position: "absolute",
-    right: "24px",
-    backgroundColor: "transparent",
-    border: "2px solid #C9BB8E",
-    borderRadius: "5px",
-    color: "#BDA55D",
+    width: "80px",
+    backgroundColor: "#C9BB8E",
+    border: "2px solid white",
+    borderRadius: "3px",
+    color: "white",
     fontWeight: "bold",
+    marginBottom: "20px",
     "&:hover": {
-      backgroundColor: "#C9BB8E",
+      backgroundColor: "transparent",
       border: "2px solid #BDA55D",
-      color: "white",
+    },
+  },
+  submitButton: {
+    height: "35px",
+    width: "90px",
+    backgroundColor: "#C9BB8E",
+    border: "2px solid white",
+    borderRadius: "3px",
+    color: "white",
+    fontWeight: "bold",
+    marginTop: "20px",
+    "&:hover": {
+      backgroundColor: "transparent",
+      border: "2px solid #BDA55D",
     },
   },
 }));
@@ -61,50 +84,54 @@ const chefs = [
 ];
 
 const AddOrder: React.FC = () => {
+  let navigate = useNavigate();
   const classes = useStyles();
-  const [assignedChef, setAssignedChef] = useState<string>("EUR");
+  const [assignedChef, setAssignedChef] = useState<string>("");
 
   const handleChange = (event: React.FormEvent) => {
     setAssignedChef((event.target as HTMLInputElement).value);
   };
+
+  const backButtonHandler = () => {
+    navigate("/", { replace: true });
+  };
   return (
     <>
       <div className={classes.container}>
-        <button className={classes.backButton}>Back</button>
-      </div>
-      <div className={classes.container}>
         <form className={classes.root}>
-          <div>
-            <TextField id="food-item" label="Food Item" variant="filled" />
-            <TextField
-              id="quantity"
-              label="Quantity"
-              type="number"
-              variant="filled"
-            />
-            <TextField
-              id="chef"
-              select
-              label="Assigned Chef"
-              variant="filled"
-              value={assignedChef}
-              onChange={handleChange}
-            >
-              {chefs.map((chef) => (
-                <MenuItem key={chef.value} value={chef.value}>
-                  {chef.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-              id="table"
-              label="Table No."
-              type="number"
-              variant="filled"
-            />
+          <button className={classes.backButton} onClick={backButtonHandler}>
+            Back
+          </button>
+          <div className={classes.inputField}>
+            <div>
+              <TextField id="food-item" label="Food Item" />
+            </div>
+            <div>
+              <TextField id="quantity" label="Quantity" type="number" />
+            </div>
+            <div>
+              <TextField
+                id="chef"
+                select
+                label="Assigned Chef"
+                value={assignedChef}
+                onChange={handleChange}
+              >
+                {chefs.map((chef) => (
+                  <MenuItem key={chef.value} value={chef.value}>
+                    {chef.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </div>
+            <div>
+              <TextField id="table" label="Table No." type="number" />
+            </div>
           </div>
           <div>
-            <button>Submit</button>
+            <button type="submit" className={classes.submitButton}>
+              Submit
+            </button>
           </div>
         </form>
       </div>
