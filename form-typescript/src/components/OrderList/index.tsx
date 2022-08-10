@@ -1,22 +1,39 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { Order } from "../../model/order";
 import SearchBar from "../SearchBar/index";
+import SingleOrder from "../SingleOrder";
 
 const useStyles = makeStyles({
   table: {
     margin: "24px",
     padding: "24px",
-    borderBottom: "1px solid #C9BB8E",
   },
   column: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+
     color: "#BDA55D",
     fontWeight: "bold",
+    paddingBottom: "20px",
+    borderBottom: "1px solid #C9BB8E",
+  },
+  order: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    color: "black",
+    paddingTop: "10px",
+    paddingBottom: "5px",
   },
 });
 
-const OrderList: React.FC = () => {
+interface OrderListProps {
+  orders: Order[];
+  setOrders: React.Dispatch<React.SetStateAction<Order[]>>;
+}
+
+const OrderList = ({ orders, setOrders }: OrderListProps) => {
   const classes = useStyles();
   return (
     <>
@@ -30,6 +47,19 @@ const OrderList: React.FC = () => {
           <div>Table No.</div>
           <div>Update</div>
           <div>Delete</div>
+        </div>
+
+        <div>
+          {orders.map((order) => (
+            <div className={classes.order}>
+              <SingleOrder
+                order={order}
+                key={order.id}
+                orders={orders}
+                setOrders={setOrders}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </>

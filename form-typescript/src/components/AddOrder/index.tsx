@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -83,31 +83,73 @@ const chefs = [
   },
 ];
 
-const AddOrder: React.FC = () => {
+interface AddOrderProps {
+  foodItem: string;
+  setFoodItem: React.Dispatch<React.SetStateAction<string>>;
+  quantity: number;
+  setQuantity: React.Dispatch<React.SetStateAction<number>>;
+  assignedChef: string;
+  setAssignedChef: React.Dispatch<React.SetStateAction<string>>;
+  tableNo: number;
+  setTableNo: React.Dispatch<React.SetStateAction<number>>;
+  addOrderHandler: (e: React.FormEvent) => void;
+}
+
+const AddOrder = ({
+  foodItem,
+  setFoodItem,
+  quantity,
+  setQuantity,
+  assignedChef,
+  setAssignedChef,
+  tableNo,
+  setTableNo,
+  addOrderHandler,
+}: AddOrderProps) => {
   let navigate = useNavigate();
   const classes = useStyles();
-  const [assignedChef, setAssignedChef] = useState<string>("");
-
-  const handleChange = (event: React.FormEvent) => {
-    setAssignedChef((event.target as HTMLInputElement).value);
-  };
 
   const backButtonHandler = () => {
     navigate("/", { replace: true });
   };
+
+  // const setQuantityHandler = (quantity: string) => {
+  //   setQuantity(parseInt(quantity));
+  // };
+
+  // const setTableNoHandler = (tableNo: string) => {
+  //   setTableNo(parseInt(tableNo));
+  // };
+
   return (
     <>
       <div className={classes.container}>
-        <form className={classes.root}>
+        <form
+          className={classes.root}
+          onSubmit={(e) => {
+            addOrderHandler(e);
+          }}
+        >
           <button className={classes.backButton} onClick={backButtonHandler}>
             Back
           </button>
           <div className={classes.inputField}>
             <div>
-              <TextField id="food-item" label="Food Item" />
+              <TextField
+                id="food-item"
+                label="Food Item"
+                value={foodItem}
+                onChange={(e) => setFoodItem(e.target.value)}
+              />
             </div>
             <div>
-              <TextField id="quantity" label="Quantity" type="number" />
+              <TextField
+                id="quantity"
+                label="Quantity"
+                type="number"
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+              />
             </div>
             <div>
               <TextField
@@ -115,7 +157,7 @@ const AddOrder: React.FC = () => {
                 select
                 label="Assigned Chef"
                 value={assignedChef}
-                onChange={handleChange}
+                onChange={(e) => setAssignedChef(e.target.value)}
               >
                 {chefs.map((chef) => (
                   <MenuItem key={chef.value} value={chef.value}>
@@ -125,7 +167,13 @@ const AddOrder: React.FC = () => {
               </TextField>
             </div>
             <div>
-              <TextField id="table" label="Table No." type="number" />
+              <TextField
+                id="table"
+                label="Table No."
+                type="number"
+                value={tableNo}
+                onChange={(e) => setTableNo(Number(e.target.value))}
+              />
             </div>
           </div>
           <div>

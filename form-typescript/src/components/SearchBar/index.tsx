@@ -17,7 +17,6 @@ const useStyles = makeStyles({
     border: "none",
     boxShadow: "inset 0 0 5px #C9BB8E",
     "&:focus": {
-      boxShadow: "0 0 10px 1200px rgba(0, 0, 0, 0.5)",
       outline: "none",
     },
   },
