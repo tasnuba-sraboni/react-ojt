@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
+import { addOrderType } from "../index";
+import { ErrorType } from "../index";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -83,81 +85,145 @@ const chefs = [
   },
 ];
 
-interface AddOrderProps {
-  foodItem: string;
-  setFoodItem: React.Dispatch<React.SetStateAction<string>>;
-  quantity: number;
-  setQuantity: React.Dispatch<React.SetStateAction<number>>;
-  assignedChef: string;
-  setAssignedChef: React.Dispatch<React.SetStateAction<string>>;
-  tableNo: number;
-  setTableNo: React.Dispatch<React.SetStateAction<number>>;
+type AddOrderProps = {
+  order: addOrderType;
+  setOrder: React.Dispatch<React.SetStateAction<addOrderType>>;
+  errors: ErrorType;
+  setErrors: React.Dispatch<React.SetStateAction<ErrorType>>;
   addOrderHandler: (e: React.FormEvent) => void;
-}
+};
 
 const AddOrder = ({
-  foodItem,
-  setFoodItem,
-  quantity,
-  setQuantity,
-  assignedChef,
-  setAssignedChef,
-  tableNo,
-  setTableNo,
+  order,
+  setOrder,
+  errors,
+  setErrors,
   addOrderHandler,
 }: AddOrderProps) => {
   let navigate = useNavigate();
   const classes = useStyles();
+  const numericInput = "^[1-9][0-9]*$";
+  const numericZero = "^[0][0-9]*$";
 
+  // navigates to homepage
   const backButtonHandler = () => {
     navigate("/", { replace: true });
   };
 
-  // const setQuantityHandler = (quantity: string) => {
-  //   setQuantity(parseInt(quantity));
-  // };
+  // takes inputs from form and merge them with previous order enties
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
 
-  // const setTableNoHandler = (tableNo: string) => {
-  //   setTableNo(parseInt(tableNo));
-  // };
+    setOrder((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
+  };
+
+  // validates the input fields of the form
+  const isValid = () => {
+    let hasError = false;
+    const copyErrors: ErrorType = { ...errors };
+
+    const validationFields = [
+      "foodItem",
+      "quantity",
+      "assignedChef",
+      "tableNo",
+    ];
+
+    for (let key in copyErrors) {
+      if (
+        validationFields.includes(key) &&
+        order[key as keyof typeof order] === ""
+      ) {
+        copyErrors[key] = "required";
+        hasError = true;
+      } else {
+        copyErrors[key] = ``;
+      }
+    }
+    if (order.foodItem.length <= 3) {
+      copyErrors.foodItem = "Must contain at least 4 characters";
+      hasError = true;
+    } else {
+      copyErrors.foodItem = ``;
+    }
+
+    if (order.quantity.match(numericInput)) {
+      copyErrors.quantity = ``;
+    } else if (order.quantity.match(numericZero)) {
+      copyErrors.quantity = "Value must not start with zero";
+      hasError = true;
+    } else {
+      copyErrors.quantity = "Numeric values only";
+      hasError = true;
+    }
+    if (order.tableNo.match(numericInput)) {
+      copyErrors.tableNo = ``;
+    } else if (order.tableNo.match(numericZero)) {
+      copyErrors.tableNo = "Value must not start with zero";
+      hasError = true;
+    } else {
+      copyErrors.tableNo = "Numeric values only";
+      hasError = true;
+    }
+
+    setErrors(copyErrors);
+
+    return hasError;
+  };
 
   return (
-    <>
+    <React.Fragment>
       <div className={classes.container}>
-        <form
-          className={classes.root}
-          onSubmit={(e) => {
-            addOrderHandler(e);
-          }}
-        >
+        <form className={classes.root}>
           <button className={classes.backButton} onClick={backButtonHandler}>
             Back
           </button>
           <div className={classes.inputField}>
             <div>
               <TextField
-                id="food-item"
+                name="foodItem"
+                id="foodItem"
                 label="Food Item"
-                value={foodItem}
-                onChange={(e) => setFoodItem(e.target.value)}
+                value={order.foodItem}
+                required={true}
+                onChange={handleChange}
+                helperText={errors.foodItem}
+                error={Boolean(errors.foodItem)}
               />
             </div>
             <div>
               <TextField
+                name="quantity"
                 id="quantity"
                 label="Quantity"
-                type="number"
-                value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
+                value={order.quantity}
+                required={true}
+                onChange={handleChange}
+                helperText={errors.quantity}
+                error={Boolean(errors.quantity)}
               />
             </div>
             <div>
               <TextField
-                id="chef"
                 select
+                name="assignedChef"
+                id="assignedChef"
                 label="Assigned Chef"
-                value={assignedChef}
-                onChange={(e) => setAssignedChef(e.target.value)}
+                value={order.assignedChef}
+                required={true}
+                onChange={handleChange}
+                helperText={errors.assignedChef}
+                error={Boolean(errors.assignedChef)}
               >
                 {chefs.map((chef) => (
                   <MenuItem key={chef.value} value={chef.value}>
@@ -168,22 +234,34 @@ const AddOrder = ({
             </div>
             <div>
               <TextField
-                id="table"
+                name="tableNo"
+                id="tableNo"
                 label="Table No."
-                type="number"
-                value={tableNo}
-                onChange={(e) => setTableNo(Number(e.target.value))}
+                value={order.tableNo}
+                required={true}
+                onChange={handleChange}
+                helperText={errors.tableNo}
+                error={Boolean(errors.tableNo)}
               />
             </div>
           </div>
           <div>
-            <button type="submit" className={classes.submitButton}>
+            <button
+              type="submit"
+              className={classes.submitButton}
+              onClick={(e: React.FormEvent) => {
+                if (isValid()) {
+                  return;
+                }
+                addOrderHandler(e);
+              }}
+            >
               Submit
             </button>
           </div>
         </form>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 export default AddOrder;

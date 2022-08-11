@@ -42,10 +42,13 @@ const useStyles = makeStyles({
 
 const SearchBar: React.FC = () => {
   let navigate = useNavigate();
+  const classes = useStyles();
+
+  // navigates to the create order form
   const handleAddButton = () => {
     navigate("/add-order", { replace: true });
   };
-  const classes = useStyles();
+
   return (
     <div className={classes.container}>
       <SearchIcon className={classes.searchIcon} />

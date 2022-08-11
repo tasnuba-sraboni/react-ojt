@@ -34,7 +34,6 @@ const navItems = ["Home", "Menu", "Chefs", "Waiters"];
 
 const Header: React.FC = () => {
   const classes = useStyles();
-
   return (
     <div className={classes.appBar}>
       <div className={classes.title}>

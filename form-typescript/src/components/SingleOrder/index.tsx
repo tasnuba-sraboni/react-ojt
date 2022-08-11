@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Order } from "../../model/order";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -36,18 +36,21 @@ type SingleOrderProps = {
 
 const SingleOrder = ({ order, orders, setOrders }: SingleOrderProps) => {
   const classes = useStyles();
-  const [edit, setEdit] = useState<boolean>(false);
-  const [editFoodItem, setEditFoodItem] = useState<string>(order.foodItem);
-  const [editQuantity, setEditQuantity] = useState<number>(order.quantity);
-  const [editAssignedChef, setEditAssignedChef] = useState<string>(
+  const [edit, setEdit] = React.useState<boolean>(false);
+  const [editFoodItem, setEditFoodItem] = React.useState<string>(
+    order.foodItem
+  );
+  const [editQuantity, setEditQuantity] = React.useState<string>(
+    order.quantity
+  );
+  const [editAssignedChef, setEditAssignedChef] = React.useState<string>(
     order.assignedChef
   );
-  const [editTableNo, setEditTableNo] = useState<number>(order.tableNo);
+  const [editTableNo, setEditTableNo] = React.useState<string>(order.tableNo);
 
-  useEffect(() => {
-    console.log(edit);
-  }, [edit]);
+  // ============================== Methods =========================
 
+  // toggles the value of isDone variable when checkbox is clicked
   const handleDone = (id: number) => {
     setOrders((prev) =>
       prev.map((order) =>
@@ -56,6 +59,7 @@ const SingleOrder = ({ order, orders, setOrders }: SingleOrderProps) => {
     );
   };
 
+  // updates the edited fields for a certain order entry
   const handleEdit = (e: React.FormEvent, id: number) => {
     e.preventDefault();
     setOrders((prev) =>
@@ -74,10 +78,12 @@ const SingleOrder = ({ order, orders, setOrders }: SingleOrderProps) => {
     setEdit(false);
   };
 
+  // deletes a certain order entry
   const handleDelete = (id: number) => {
     setOrders((prev) => prev.filter((order) => order.id !== id));
   };
 
+  // turns the edit mode on
   const editButtonClickHandler = (e: React.FormEvent) => {
     e.preventDefault();
     setEdit(true);
@@ -105,20 +111,7 @@ const SingleOrder = ({ order, orders, setOrders }: SingleOrderProps) => {
         {edit ? (
           <input
             value={editQuantity}
-            onChange={(e) => setEditQuantity(Number(e.target.value))}
-          />
-        ) : order.isDone ? (
-          <s>{order.quantity}</s>
-        ) : (
-          <span>{order.quantity}</span>
-        )}
-      </div>
-
-      <div>
-        {edit ? (
-          <input
-            value={editQuantity}
-            onChange={(e) => setEditQuantity(Number(e.target.value))}
+            onChange={(e) => setEditQuantity(e.target.value)}
           />
         ) : order.isDone ? (
           <s>{order.quantity}</s>
@@ -144,7 +137,7 @@ const SingleOrder = ({ order, orders, setOrders }: SingleOrderProps) => {
         {edit ? (
           <input
             value={editTableNo}
-            onChange={(e) => setEditTableNo(Number(e.target.value))}
+            onChange={(e) => setEditTableNo(e.target.value)}
           />
         ) : order.isDone ? (
           <s>{order.tableNo}</s>
@@ -181,5 +174,4 @@ const SingleOrder = ({ order, orders, setOrders }: SingleOrderProps) => {
     </form>
   );
 };
-
 export default SingleOrder;

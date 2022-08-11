@@ -1,41 +1,65 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./Header";
 import OrderList from "./OrderList";
 import AddOrder from "./AddOrder";
 import { Order } from "../model/order";
 
-const FormApp: React.FC = () => {
-  const [foodItem, setFoodItem] = useState<string>("");
-  const [quantity, setQuantity] = useState<number>(0);
-  const [assignedChef, setAssignedChef] = useState<string>("");
-  const [tableNo, setTableNo] = useState<number>(0);
-  const [orders, setOrders] = useState<Order[]>([]);
+export type addOrderType = {
+  id?: number;
+  foodItem: string;
+  quantity: string;
+  assignedChef: string;
+  tableNo: string;
+  isDone?: boolean;
+};
+const addOrder: addOrderType = {
+  foodItem: "",
+  quantity: "",
+  assignedChef: "",
+  tableNo: "",
+};
+export type ErrorType = {
+  [key: string]: string;
+};
+const initialError: ErrorType = {
+  foodItem: "",
+  quantity: "",
+  assignedChef: "",
+  tableNo: "",
+};
 
+const FormApp: React.FC = () => {
+  const [order, setOrder] = React.useState<addOrderType>(addOrder);
+  const [errors, setErrors] = React.useState(initialError);
+  const [orders, setOrders] = React.useState<Order[]>([]);
+
+  // takes input from form and creates new order and then sets the initial values to empty string
   const addOrderHandler = (e: React.FormEvent) => {
     e.preventDefault();
     setOrders((prev) => [
       ...prev,
       {
         id: Date.now(),
-        foodItem: foodItem,
-        quantity: quantity,
-        assignedChef: assignedChef,
-        tableNo: tableNo,
+        foodItem: order.foodItem,
+        quantity: order.quantity,
+        assignedChef: order.assignedChef,
+        tableNo: order.tableNo,
         isDone: false,
       },
     ]);
-    setFoodItem("");
-    setQuantity(0);
-    setAssignedChef("");
-    setTableNo(0);
+    setOrder({
+      foodItem: "",
+      quantity: "",
+      assignedChef: "",
+      tableNo: "",
+    });
   };
   return (
-    <div>
+    <React.Fragment>
       <div>
         <Header />
       </div>
-
       <div>
         <Routes>
           <Route
@@ -45,14 +69,10 @@ const FormApp: React.FC = () => {
           <Route
             element={
               <AddOrder
-                foodItem={foodItem}
-                setFoodItem={setFoodItem}
-                quantity={quantity}
-                setQuantity={setQuantity}
-                assignedChef={assignedChef}
-                setAssignedChef={setAssignedChef}
-                tableNo={tableNo}
-                setTableNo={setTableNo}
+                order={order}
+                setOrder={setOrder}
+                errors={errors}
+                setErrors={setErrors}
                 addOrderHandler={addOrderHandler}
               />
             }
@@ -60,8 +80,7 @@ const FormApp: React.FC = () => {
           />
         </Routes>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
-
 export default FormApp;

@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
 import { Order } from "../../model/order";
 import SearchBar from "../SearchBar/index";
 import SingleOrder from "../SingleOrder";
@@ -36,7 +37,7 @@ interface OrderListProps {
 const OrderList = ({ orders, setOrders }: OrderListProps) => {
   const classes = useStyles();
   return (
-    <>
+    <React.Fragment>
       <SearchBar />
       <div className={classes.table}>
         <div className={classes.column}>
@@ -62,7 +63,7 @@ const OrderList = ({ orders, setOrders }: OrderListProps) => {
           ))}
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 export default OrderList;

@@ -1,8 +1,8 @@
 export interface Order {
     id: number;
     foodItem: string;
-    quantity: number;
+    quantity: string;
     assignedChef: string;
-    tableNo: number;
+    tableNo: string;
     isDone: boolean;
 }
