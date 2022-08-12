@@ -36,9 +36,10 @@ interface OrderListProps {
 
 const OrderList = ({ orders, setOrders }: OrderListProps) => {
   const classes = useStyles();
+  const [searchInput, setSearchInput] = React.useState<string>("");
   return (
     <React.Fragment>
-      <SearchBar />
+      <SearchBar setSearchInput={setSearchInput} />
       <div className={classes.table}>
         <div className={classes.column}>
           <div>Done</div>
@@ -51,16 +52,22 @@ const OrderList = ({ orders, setOrders }: OrderListProps) => {
         </div>
 
         <div>
-          {orders.map((order) => (
-            <div className={classes.order}>
-              <SingleOrder
-                order={order}
-                key={order.id}
-                orders={orders}
-                setOrders={setOrders}
-              />
-            </div>
-          ))}
+          {orders
+            .filter(
+              (item) =>
+                item.foodItem.toLowerCase().includes(searchInput) ||
+                item.assignedChef.toLowerCase().includes(searchInput)
+            )
+            .map((order) => (
+              <div className={classes.order}>
+                <SingleOrder
+                  order={order}
+                  key={order.id}
+                  orders={orders}
+                  setOrders={setOrders}
+                />
+              </div>
+            ))}
         </div>
       </div>
     </React.Fragment>

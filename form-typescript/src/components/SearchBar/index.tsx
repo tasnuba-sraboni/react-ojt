@@ -40,7 +40,11 @@ const useStyles = makeStyles({
   },
 });
 
-const SearchBar: React.FC = () => {
+type SearchBarProps = {
+  setSearchInput: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const SearchBar: React.FC<SearchBarProps> = ({ setSearchInput }) => {
   let navigate = useNavigate();
   const classes = useStyles();
 
@@ -54,8 +58,9 @@ const SearchBar: React.FC = () => {
       <SearchIcon className={classes.searchIcon} />
       <input
         type="input"
-        placeholder="Search order"
+        placeholder="Search order by food item or assigned chef"
         className={classes.searchBar}
+        onChange={(event) => setSearchInput(event.target.value.trim())}
       />
       <button onClick={handleAddButton} className={classes.addButton}>
         Add Order
