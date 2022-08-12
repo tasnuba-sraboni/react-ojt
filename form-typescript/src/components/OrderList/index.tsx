@@ -54,9 +54,9 @@ const OrderList = ({ orders, setOrders }: OrderListProps) => {
         <div>
           {orders
             .filter(
-              (item) =>
-                item.foodItem.toLowerCase().includes(searchInput) ||
-                item.assignedChef.toLowerCase().includes(searchInput)
+              (order) =>
+                order.foodItem.toLowerCase().includes(searchInput) ||
+                order.assignedChef.toLowerCase().includes(searchInput)
             )
             .map((order) => (
               <div className={classes.order}>
