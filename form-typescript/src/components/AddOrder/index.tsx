@@ -250,10 +250,10 @@ const AddOrder = ({
               type="submit"
               className={classes.submitButton}
               onClick={(e: React.FormEvent) => {
-                if (isValid()) {
-                  return;
+                e.preventDefault();
+                if (!isValid()) {
+                  addOrderHandler(e);
                 }
-                addOrderHandler(e);
               }}
             >
               Submit

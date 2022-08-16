@@ -31,7 +31,7 @@ const initialError: ErrorType = {
 
 const FormApp: React.FC = () => {
   const [order, setOrder] = React.useState<addOrderType>(addOrder);
-  const [errors, setErrors] = React.useState(initialError);
+  const [errors, setErrors] = React.useState<ErrorType>(initialError);
   const [orders, setOrders] = React.useState<Order[]>([]);
 
   // takes input from form and creates new order and then sets the initial values to empty string
