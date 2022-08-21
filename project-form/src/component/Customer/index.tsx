@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   customer: {
-    fontSize: "12px",
+    fontSize: "10px",
     padding: "10px 0",
     display: "grid",
     gridTemplateColumns: "2fr 2fr 1fr",

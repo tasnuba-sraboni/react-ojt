@@ -4,50 +4,77 @@ import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
   customer: {
-    fontSize: "12px",
+    fontSize: "10px",
     padding: "10px 0",
   },
+  rows: {
+    display: "grid",
+    gridTemplateColumns: "repeat(9, 1fr)",
+    alignItems: "center",
+  },
+  gridLabel: {
+    gridColumn: "1",
+  },
+  gridLabelMiddle: {
+    gridColumn: "4",
+  },
+  gridLabelRight: {
+    gridColumn: "7",
+  },
+  gridInput: {
+    gridColumn: "2/4",
+  },
+  gridInputLeft: {
+    gridColumn: "2",
+  },
+  gridInputMiddle: {
+    gridColumn: "5",
+  },
+  gridInputRight: {
+    gridColumn: "8/10",
+  },
+  gridInputMedium: {
+    gridColumn: "2/5",
+  },
+  gridInputLarge: {
+    gridColumn: "2/6",
+    "& .MuiInputBase-input": {
+      width: theme.spacing(32),
+    },
+  },
+  gridSearchButton: {
+    gridColumn: "4",
+  },
   label: {
-    width: "85px",
+    width: "75px",
     display: "inline-block",
     textAlign: "right",
-    paddingRight: "12px",
-  },
-  titleLabel: {
-    paddingLeft: "50px",
     paddingRight: "10px",
   },
-  // input: {
-  //   border: "1px solid black",
-  //   borderRadius: "15px",
-  //   outline: "none",
-  //   margin: "2px 0",
-  //   // marginRight: "30px",
-  // },
+  titleLabel: {
+    paddingLeft: "40px",
+    // paddingRight: "10px",
+  },
   searchIcon: {
-    height: "30px",
-    width: "30px",
+    height: "20px",
+    width: "20px",
     backgroundColor: "white",
     border: "1px solid black",
     borderRadius: "50%",
-    marginLeft: "15px",
+    marginLeft: "10px",
+    padding: 0,
+    paddingTop: "2px",
   },
-  inputGrid: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-  },
-  inputGridRight: {
-    position: "absolute",
-    left: "410px",
-  },
+
   input: {
     border: "1px solid #000",
     borderRadius: "25px",
     margin: "2px",
+    paddingInline: "10px",
     backgroundColor: "white",
     "& .MuiInputBase-input": {
       padding: theme.spacing(0),
-      width: theme.spacing(15),
+      // width: theme.spacing(18),
     },
   },
 }));
@@ -56,47 +83,81 @@ const BasicInfo = () => {
   const classes = useStyles();
   return (
     <div className={classes.customer}>
-      <div>
-        <label className={classes.label}>phone number </label>
-        {/* <input size={12} className={classes.input} /> */}
-        <TextField
-          name="phoneNumber"
-          id="phoneNumber"
-          InputProps={{ disableUnderline: true }}
-          className={classes.input}
-        />
-      </div>
-      <div>
-        <label className={classes.label}>Your name </label>
-        <TextField
-          name="yourName"
-          id="yourName"
-          InputProps={{ disableUnderline: true }}
-          className={classes.input}
-        />
+      <div className={classes.rows}>
+        <div className={classes.gridLabel}>
+          <label className={classes.label}>phone number </label>
+        </div>
 
-        <label className={classes.titleLabel}>title </label>
-        <input size={3} className={classes.input} />
+        <div className={classes.gridInput}>
+          <TextField
+            name="phoneNumber"
+            id="phoneNumber"
+            InputProps={{ disableUnderline: true }}
+            className={classes.input}
+          />
+        </div>
       </div>
-      <div>
-        <label className={classes.label}>Furigana </label>
-        <TextField
-          name="furigana"
-          id="furigana"
-          InputProps={{ disableUnderline: true }}
-          className={classes.input}
-        />
+      <div className={classes.rows}>
+        <div className={classes.gridLabel}>
+          <label className={classes.label}>Your name </label>
+        </div>
+        <div className={classes.gridInput}>
+          <TextField
+            name="yourName"
+            id="yourName"
+            InputProps={{ disableUnderline: true }}
+            className={classes.input}
+          />
+        </div>
+        <div className={classes.gridLabelMiddle}>
+          <label className={classes.titleLabel}>title </label>
+        </div>
+        <div className={classes.gridInputMiddle}>
+          <TextField
+            name="title"
+            id="title"
+            InputProps={{ disableUnderline: true }}
+            className={classes.input}
+          />
+        </div>
       </div>
-      <div className={classes.inputGrid}>
-        <div>
+      <div className={classes.rows}>
+        <div className={classes.gridLabel}>
+          <label className={classes.label}>Furigana </label>
+        </div>
+        <div className={classes.gridInput}>
+          <TextField
+            name="furigana"
+            id="furigana"
+            InputProps={{ disableUnderline: true }}
+            className={classes.input}
+          />
+        </div>
+      </div>
+      <div className={classes.rows}>
+        <div className={classes.gridLabel}>
           <label className={classes.label}> T </label>
-          <input size={12} className={classes.input} />
+        </div>
+
+        <div className={classes.gridInput}>
+          <TextField
+            name="t"
+            id="t"
+            InputProps={{ disableUnderline: true }}
+            className={classes.input}
+          />
+        </div>
+        <div className={classes.gridSearchButton}>
           <button className={classes.searchIcon}>
-            <SearchIcon fontSize="small" />
+            <SearchIcon fontSize="inherit" />
           </button>
         </div>
-        <div className={classes.inputGridRight}>
+
+        <div className={classes.gridLabelRight}>
           <label className={classes.label}> sort code </label>
+        </div>
+
+        <div className={classes.gridInputRight}>
           <TextField
             name="sortCode"
             id="sortCode"
@@ -105,13 +166,22 @@ const BasicInfo = () => {
           />
         </div>
       </div>
-      <div className={classes.inputGrid}>
-        <div>
+      <div className={classes.rows}>
+        <div className={classes.gridLabel}>
           <label className={classes.label}> Prefectures </label>
-          <input size={3} className={classes.input} />
         </div>
-        <div className={classes.inputGridRight}>
+        <div className={classes.gridInputLeft}>
+          <TextField
+            name="prefectures"
+            id="prefectures"
+            InputProps={{ disableUnderline: true }}
+            className={classes.input}
+          />
+        </div>
+        <div className={classes.gridLabelRight}>
           <label className={classes.label}> service level </label>
+        </div>
+        <div className={classes.gridInputRight}>
           <TextField
             name="serviceLevel"
             id="serviceLevel"
@@ -120,13 +190,24 @@ const BasicInfo = () => {
           />
         </div>
       </div>
-      <div className={classes.inputGrid}>
-        <div>
+
+      <div className={classes.rows}>
+        <div className={classes.gridLabel}>
           <label className={classes.label}> Address Line 1 </label>
-          <input className={classes.input} />
         </div>
-        <div className={classes.inputGridRight}>
+        <div className={classes.gridInputMedium}>
+          <TextField
+            name="addressLine1"
+            id="addressLine1"
+            InputProps={{ disableUnderline: true }}
+            className={classes.input}
+          />
+        </div>
+        <div className={classes.gridLabelRight}>
           <label className={classes.label}> group code </label>
+        </div>
+
+        <div className={classes.gridInputRight}>
           <TextField
             name="groupCode"
             id="groupCode"
@@ -135,25 +216,73 @@ const BasicInfo = () => {
           />
         </div>
       </div>
-      <div>
-        <label className={classes.label}> Address 2</label>
-        <input className={classes.input} />
+
+      <div className={classes.rows}>
+        <div className={classes.gridLabel}>
+          <label className={classes.label}> Address 2</label>
+        </div>
+        <div className={classes.gridInputMedium}>
+          <TextField
+            name="address2"
+            id="address2"
+            InputProps={{ disableUnderline: true }}
+            className={classes.input}
+          />
+        </div>
       </div>
-      <div>
-        <label className={classes.label}> Address 3</label>
-        <input className={classes.input} />
+      <div className={classes.rows}>
+        <div className={classes.gridLabel}>
+          <label className={classes.label}> Address 3</label>
+        </div>
+        <div className={classes.gridInputMedium}>
+          <TextField
+            name="address3"
+            id="address3"
+            InputProps={{ disableUnderline: true }}
+            className={classes.input}
+          />
+        </div>
       </div>
-      <div>
-        <label className={classes.label}> Address 4</label>
-        <input className={classes.input} />
+      <div className={classes.rows}>
+        <div className={classes.gridLabel}>
+          <label className={classes.label}> Address 4</label>
+        </div>
+        <div className={classes.gridInputMedium}>
+          <TextField
+            name="address4"
+            id="address4"
+            InputProps={{ disableUnderline: true }}
+            className={classes.input}
+          />
+        </div>
       </div>
-      <div>
-        <label className={classes.label}> company name</label>
-        <input size={30} className={classes.input} />
+
+      <div className={classes.rows}>
+        <div className={classes.gridLabel}>
+          <label className={classes.label}> company name</label>
+        </div>
+        <div className={classes.gridInputLarge}>
+          <TextField
+            name="companyName"
+            id="companyName"
+            InputProps={{ disableUnderline: true }}
+            className={classes.input}
+          />
+        </div>
       </div>
-      <div>
-        <label className={classes.label}> Department name</label>
-        <input size={30} className={classes.input} />
+
+      <div className={classes.rows}>
+        <div className={classes.gridLabel}>
+          <label className={classes.label}> Department name</label>
+        </div>
+        <div className={classes.gridInputLarge}>
+          <TextField
+            name="departmentName"
+            id="departmentName"
+            InputProps={{ disableUnderline: true }}
+            className={classes.input}
+          />
+        </div>
       </div>
     </div>
   );

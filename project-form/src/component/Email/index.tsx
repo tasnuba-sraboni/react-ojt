@@ -3,11 +3,11 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   emailInfo: {
     backgroundColor: "#98FB98",
-    fontSize: "12px",
+    fontSize: "10px",
     paddingTop: "10px",
   },
   label: {
-    width: "85px",
+    width: "75px",
     display: "inline-block",
     textAlign: "right",
     paddingRight: "12px",
