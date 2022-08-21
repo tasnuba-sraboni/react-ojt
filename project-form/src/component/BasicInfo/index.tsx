@@ -1,6 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from "@material-ui/core/TextField";
+import { addCustomerType } from "..";
+import { cutomerDetails } from "..";
+import { ErrorType } from "..";
 
 const useStyles = makeStyles((theme) => ({
   customer: {
@@ -79,8 +82,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BasicInfo = () => {
+type BasicInfoProps = {
+  customer: addCustomerType;
+  setCustomer: React.Dispatch<React.SetStateAction<addCustomerType>>;
+  errors: ErrorType;
+  setErrors: React.Dispatch<React.SetStateAction<ErrorType>>;
+  handelSetCustomer: (cutomerDetails: cutomerDetails) => void;
+};
+
+const BasicInfo = ({
+  customer,
+  setCustomer,
+  errors,
+  setErrors,
+
+  handelSetCustomer,
+}: BasicInfoProps) => {
   const classes = useStyles();
+
   return (
     <div className={classes.customer}>
       <div className={classes.rows}>
@@ -92,8 +111,18 @@ const BasicInfo = () => {
           <TextField
             name="phoneNumber"
             id="phoneNumber"
+            value={customer.basicInfo.phoneNumber}
+            onChange={(event) => {
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }}
             InputProps={{ disableUnderline: true }}
             className={classes.input}
+            helperText={errors.phoneNumber}
+            error={Boolean(errors.phoneNumber)}
           />
         </div>
       </div>
@@ -105,8 +134,17 @@ const BasicInfo = () => {
           <TextField
             name="yourName"
             id="yourName"
+            onChange={(event) => {
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }}
             InputProps={{ disableUnderline: true }}
             className={classes.input}
+            helperText={errors.yourName}
+            error={Boolean(errors.yourName)}
           />
         </div>
         <div className={classes.gridLabelMiddle}>
@@ -116,8 +154,17 @@ const BasicInfo = () => {
           <TextField
             name="title"
             id="title"
+            onChange={(event) => {
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }}
             InputProps={{ disableUnderline: true }}
             className={classes.input}
+            helperText={errors.title}
+            error={Boolean(errors.title)}
           />
         </div>
       </div>
@@ -129,8 +176,17 @@ const BasicInfo = () => {
           <TextField
             name="furigana"
             id="furigana"
+            onChange={(event) => {
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }}
             InputProps={{ disableUnderline: true }}
             className={classes.input}
+            helperText={errors.furigana}
+            error={Boolean(errors.furigana)}
           />
         </div>
       </div>
@@ -143,8 +199,17 @@ const BasicInfo = () => {
           <TextField
             name="t"
             id="t"
+            onChange={(event) => {
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }}
             InputProps={{ disableUnderline: true }}
             className={classes.input}
+            helperText={errors.t}
+            error={Boolean(errors.t)}
           />
         </div>
         <div className={classes.gridSearchButton}>
@@ -161,8 +226,17 @@ const BasicInfo = () => {
           <TextField
             name="sortCode"
             id="sortCode"
+            onChange={(event) => {
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }}
             InputProps={{ disableUnderline: true }}
             className={classes.input}
+            helperText={errors.sortCode}
+            error={Boolean(errors.sortCode)}
           />
         </div>
       </div>
@@ -174,8 +248,17 @@ const BasicInfo = () => {
           <TextField
             name="prefectures"
             id="prefectures"
+            onChange={(event) => {
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }}
             InputProps={{ disableUnderline: true }}
             className={classes.input}
+            helperText={errors.prefectures}
+            error={Boolean(errors.prefectures)}
           />
         </div>
         <div className={classes.gridLabelRight}>
@@ -185,8 +268,17 @@ const BasicInfo = () => {
           <TextField
             name="serviceLevel"
             id="serviceLevel"
+            onChange={(event) => {
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }}
             InputProps={{ disableUnderline: true }}
             className={classes.input}
+            helperText={errors.serviceLevel}
+            error={Boolean(errors.serviceLevel)}
           />
         </div>
       </div>
@@ -199,8 +291,17 @@ const BasicInfo = () => {
           <TextField
             name="addressLine1"
             id="addressLine1"
+            onChange={(event) => {
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }}
             InputProps={{ disableUnderline: true }}
             className={classes.input}
+            helperText={errors.addressLine1}
+            error={Boolean(errors.addressLine1)}
           />
         </div>
         <div className={classes.gridLabelRight}>
@@ -211,8 +312,17 @@ const BasicInfo = () => {
           <TextField
             name="groupCode"
             id="groupCode"
+            onChange={(event) => {
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }}
             InputProps={{ disableUnderline: true }}
             className={classes.input}
+            helperText={errors.groupCode}
+            error={Boolean(errors.groupCode)}
           />
         </div>
       </div>
@@ -225,8 +335,17 @@ const BasicInfo = () => {
           <TextField
             name="address2"
             id="address2"
+            onChange={(event) => {
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }}
             InputProps={{ disableUnderline: true }}
             className={classes.input}
+            helperText={errors.address2}
+            error={Boolean(errors.address2)}
           />
         </div>
       </div>
@@ -238,8 +357,17 @@ const BasicInfo = () => {
           <TextField
             name="address3"
             id="address3"
+            onChange={(event) => {
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }}
             InputProps={{ disableUnderline: true }}
             className={classes.input}
+            helperText={errors.address3}
+            error={Boolean(errors.address3)}
           />
         </div>
       </div>
@@ -251,8 +379,17 @@ const BasicInfo = () => {
           <TextField
             name="address4"
             id="address4"
+            onChange={(event) => {
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }}
             InputProps={{ disableUnderline: true }}
             className={classes.input}
+            helperText={errors.address4}
+            error={Boolean(errors.address4)}
           />
         </div>
       </div>
@@ -265,8 +402,17 @@ const BasicInfo = () => {
           <TextField
             name="companyName"
             id="companyName"
+            onChange={(event) => {
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }}
             InputProps={{ disableUnderline: true }}
             className={classes.input}
+            helperText={errors.companyName}
+            error={Boolean(errors.companyName)}
           />
         </div>
       </div>
@@ -279,8 +425,17 @@ const BasicInfo = () => {
           <TextField
             name="departmentName"
             id="departmentName"
+            onChange={(event) => {
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }}
             InputProps={{ disableUnderline: true }}
             className={classes.input}
+            helperText={errors.departmentName}
+            error={Boolean(errors.departmentName)}
           />
         </div>
       </div>
