@@ -38,17 +38,32 @@ const useStyles = makeStyles((theme) => ({
   },
   gridInputMedium: {
     gridColumn: "2/5",
+    border: "1px solid #000",
+    borderRadius: "25px",
+    margin: "2px",
+    paddingInline: "10px",
+    backgroundColor: "white",
+    "& .MuiInputBase-input": {
+      padding: theme.spacing(0),
+    },
   },
   gridInputLarge: {
     gridColumn: "2/6",
+    border: "1px solid #000",
+    borderRadius: "25px",
+    margin: "2px",
+    paddingInline: "10px",
+    backgroundColor: "white",
     "& .MuiInputBase-input": {
-      width: theme.spacing(32),
+      padding: theme.spacing(0),
     },
   },
+
   gridSearchButton: {
     gridColumn: "4",
   },
   label: {
+    gridColumn: "1",
     width: "75px",
     display: "inline-block",
     textAlign: "right",
@@ -73,11 +88,15 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #000",
     borderRadius: "25px",
     margin: "2px",
+    height: "20px",
+    marginBottom: "10px",
     paddingInline: "10px",
     backgroundColor: "white",
     "& .MuiInputBase-input": {
       padding: theme.spacing(0),
-      // width: theme.spacing(18),
+    },
+    "& .MuiFormHelperText-root": {
+      marginTop: "-3px",
     },
   },
 }));
@@ -95,7 +114,6 @@ const BasicInfo = ({
   setCustomer,
   errors,
   setErrors,
-
   handelSetCustomer,
 }: BasicInfoProps) => {
   const classes = useStyles();
@@ -284,26 +302,23 @@ const BasicInfo = ({
       </div>
 
       <div className={classes.rows}>
-        <div className={classes.gridLabel}>
-          <label className={classes.label}> Address Line 1 </label>
-        </div>
-        <div className={classes.gridInputMedium}>
-          <TextField
-            name="addressLine1"
-            id="addressLine1"
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "basicInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.addressLine1}
-            error={Boolean(errors.addressLine1)}
-          />
-        </div>
+        <label className={classes.label}> Address Line 1 </label>
+        <TextField
+          name="addressLine1"
+          id="addressLine1"
+          onChange={(event) => {
+            handelSetCustomer({
+              infoType: "basicInfo",
+              name: event.target.name,
+              value: event.target.value,
+            });
+          }}
+          InputProps={{ disableUnderline: true }}
+          className={classes.gridInputMedium}
+          helperText={errors.addressLine1}
+          error={Boolean(errors.addressLine1)}
+        />
+
         <div className={classes.gridLabelRight}>
           <label className={classes.label}> group code </label>
         </div>
@@ -328,116 +343,98 @@ const BasicInfo = ({
       </div>
 
       <div className={classes.rows}>
-        <div className={classes.gridLabel}>
-          <label className={classes.label}> Address 2</label>
-        </div>
-        <div className={classes.gridInputMedium}>
-          <TextField
-            name="address2"
-            id="address2"
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "basicInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.address2}
-            error={Boolean(errors.address2)}
-          />
-        </div>
+        <label className={classes.label}> Address 2</label>
+        <TextField
+          name="address2"
+          id="address2"
+          onChange={(event) => {
+            handelSetCustomer({
+              infoType: "basicInfo",
+              name: event.target.name,
+              value: event.target.value,
+            });
+          }}
+          InputProps={{ disableUnderline: true }}
+          className={classes.gridInputMedium}
+          helperText={errors.address2}
+          error={Boolean(errors.address2)}
+        />
       </div>
       <div className={classes.rows}>
-        <div className={classes.gridLabel}>
-          <label className={classes.label}> Address 3</label>
-        </div>
-        <div className={classes.gridInputMedium}>
-          <TextField
-            name="address3"
-            id="address3"
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "basicInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.address3}
-            error={Boolean(errors.address3)}
-          />
-        </div>
+        <label className={classes.label}> Address 3</label>
+        <TextField
+          name="address3"
+          id="address3"
+          onChange={(event) => {
+            handelSetCustomer({
+              infoType: "basicInfo",
+              name: event.target.name,
+              value: event.target.value,
+            });
+          }}
+          InputProps={{ disableUnderline: true }}
+          className={classes.gridInputMedium}
+          helperText={errors.address3}
+          error={Boolean(errors.address3)}
+        />
       </div>
       <div className={classes.rows}>
-        <div className={classes.gridLabel}>
-          <label className={classes.label}> Address 4</label>
-        </div>
-        <div className={classes.gridInputMedium}>
-          <TextField
-            name="address4"
-            id="address4"
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "basicInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.address4}
-            error={Boolean(errors.address4)}
-          />
-        </div>
+        <label className={classes.label}> Address 4</label>
+
+        <TextField
+          name="address4"
+          id="address4"
+          onChange={(event) => {
+            handelSetCustomer({
+              infoType: "basicInfo",
+              name: event.target.name,
+              value: event.target.value,
+            });
+          }}
+          InputProps={{ disableUnderline: true }}
+          className={classes.gridInputMedium}
+          helperText={errors.address4}
+          error={Boolean(errors.address4)}
+        />
       </div>
 
       <div className={classes.rows}>
-        <div className={classes.gridLabel}>
-          <label className={classes.label}> company name</label>
-        </div>
-        <div className={classes.gridInputLarge}>
-          <TextField
-            name="companyName"
-            id="companyName"
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "basicInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.companyName}
-            error={Boolean(errors.companyName)}
-          />
-        </div>
+        <label className={classes.label}> company name</label>
+        <TextField
+          name="companyName"
+          id="companyName"
+          onChange={(event) => {
+            handelSetCustomer({
+              infoType: "basicInfo",
+              name: event.target.name,
+              value: event.target.value,
+            });
+          }}
+          InputProps={{ disableUnderline: true }}
+          className={classes.gridInputLarge}
+          helperText={errors.companyName}
+          error={Boolean(errors.companyName)}
+        />
       </div>
 
       <div className={classes.rows}>
-        <div className={classes.gridLabel}>
-          <label className={classes.label}> Department name</label>
-        </div>
-        <div className={classes.gridInputLarge}>
-          <TextField
-            name="departmentName"
-            id="departmentName"
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "basicInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.departmentName}
-            error={Boolean(errors.departmentName)}
-          />
-        </div>
+        <label className={classes.label}> Department name</label>
+
+        <TextField
+          name="departmentName"
+          id="departmentName"
+          onChange={(event) => {
+            handelSetCustomer({
+              infoType: "basicInfo",
+              name: event.target.name,
+              value: event.target.value,
+            });
+          }}
+          InputProps={{ disableUnderline: true }}
+          className={classes.gridInputLarge}
+          helperText={errors.departmentName}
+          error={Boolean(errors.departmentName)}
+        />
       </div>
     </div>
   );

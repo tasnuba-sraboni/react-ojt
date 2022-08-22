@@ -4,6 +4,8 @@ import Header from "./Header";
 import Customer from "./Customer";
 import BasicInfo from "./BasicInfo";
 import Email from "./Email";
+import BlackInfo from "./BlackInfo";
+import SupplementaryInfo from "./SupplementaryInfo";
 
 const useStyles = makeStyles({
   container: {
@@ -24,7 +26,25 @@ const useStyles = makeStyles({
     paddingBottom: "10px",
     backgroundColor: "#E0FFFF",
   },
-  containerRight: {},
+  containerRight: {
+    display: "grid",
+    gridTemplateRows: "1fr 3fr 1fr",
+    gap: "10px",
+  },
+  containerRightTop: {
+    display: "grid",
+    gridTemplateColumns: "5fr 1fr",
+    alignItems: "center",
+    border: "1px solid #000",
+    marginTop: "25px",
+  },
+  containerRightBottom: {
+    border: "1px solid #000",
+    paddingInline: "10px",
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    // alignItems: "center",
+  },
 });
 
 export type addCustomerType = {
@@ -123,10 +143,13 @@ export type cutomerDetails = {
 
 const FormApp: React.FC = () => {
   const classes = useStyles();
+  const numericZero = "^[0][1][0-9]*$";
+  const numericInput = "^[1-9][0-9]*$";
+  const emailInput =
+    "^(([^<>()[]\\.,;:s@]+(.[^<>()[]\\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$";
 
   const [customer, setCustomer] = React.useState<addCustomerType>(addCustomer);
   const [errors, setErrors] = React.useState<ErrorType>(initialError);
-  //   const [isValid, setIsValid] = React.useState<boolean>(false);
 
   const handelSetCustomer = (cutomerDetails: cutomerDetails) => {
     setCustomer((prev) => {
@@ -184,6 +207,8 @@ const FormApp: React.FC = () => {
       "departmentName",
     ];
 
+    const emailValidationFields = ["email1", "email2", "email3"];
+
     for (let key in copyErrors) {
       if (
         validationFields.includes(key) &&
@@ -195,6 +220,39 @@ const FormApp: React.FC = () => {
         copyErrors[key] = ``;
       }
     }
+
+    // for (let key in copyErrors) {
+    //   if (
+    //     emailValidationFields.includes(key) &&
+    //     customer.email[key as keyof typeof customer.email].match(emailInput)
+    //   ) {
+    //     copyErrors[key] = ``;
+    //   } else {
+    //     copyErrors[key] = "Not a valid email Id";
+    //     hasError = true;
+    //   }
+    // }
+
+    if (customer.basicInfo.phoneNumber.match(numericZero)) {
+      copyErrors.phoneNumber = ``;
+    } else if (customer.basicInfo.phoneNumber.match(numericInput)) {
+      copyErrors.phoneNumber = "Not a valid phone number";
+      hasError = true;
+    } else if (customer.basicInfo.phoneNumber.length < 11) {
+      copyErrors.phoneNumber = "Not a valid phone number";
+      hasError = true;
+    } else {
+      copyErrors.phoneNumber = "Numeric values only";
+      hasError = true;
+    }
+
+    if (customer.email.email1.match(emailInput)) {
+      copyErrors.email1 = ``;
+    } else {
+      copyErrors.email1 = "Not a valid email Id";
+      hasError = true;
+    }
+
     // if (order.foodItem.length <= 3) {
     //   copyErrors.foodItem = "Must contain at least 4 characters";
     //   hasError = true;
@@ -244,26 +302,45 @@ const FormApp: React.FC = () => {
               setCustomer={setCustomer}
               errors={errors}
               setErrors={setErrors}
-              //   setIsValid={setIsValid}
               handelSetCustomer={handelSetCustomer}
             />
 
-            <Email />
+            <Email
+              customer={customer}
+              errors={errors}
+              handelSetCustomer={handelSetCustomer}
+            />
           </div>
         </div>
-        <div className={classes.containerRight}></div>
-        <div>
-          <button
-            type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-              if (!isValid()) {
-                console.log({ customer });
-              }
-            }}
-          >
-            Submit
-          </button>
+        <div className={classes.containerRight}>
+          <div className={classes.containerRightTop}>
+            <BlackInfo
+              customer={customer}
+              errors={errors}
+              handelSetCustomer={handelSetCustomer}
+            />
+          </div>
+          <div className={classes.containerRightBottom}>
+            <SupplementaryInfo
+              customer={customer}
+              errors={errors}
+              handelSetCustomer={handelSetCustomer}
+            />
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                if (!isValid()) {
+                  console.log({ customer });
+                }
+              }}
+            >
+              Submit
+            </button>
+          </div>
         </div>
       </form>
     </React.Fragment>
