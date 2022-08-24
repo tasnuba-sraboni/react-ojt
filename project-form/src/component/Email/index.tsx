@@ -3,6 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import { addCustomerType } from "..";
 import { cutomerDetails } from "..";
 import { ErrorType } from "..";
+import CustomerTextField from "../CustomerTextField";
 
 const useStyles = makeStyles((theme) => ({
   emailInfo: {
@@ -70,86 +71,57 @@ const Email = ({ customer, errors, handelSetCustomer }: EmailProps) => {
   return (
     <div className={classes.emailInfo}>
       <div className={classes.rows}>
-        <label className={classes.label}>Email 1 </label>
-
-        <TextField
+        <CustomerTextField
           name="email1"
           id="email1"
+          label="Email 1"
+          size="450px"
           value={customer.email.email1}
-          onChange={(event) => {
-            handelSetCustomer({
-              infoType: "email",
-              name: event.target.name,
-              value: event.target.value,
-            });
-          }}
-          InputProps={{ disableUnderline: true }}
-          className={classes.input}
-          helperText={errors.email1}
-          error={Boolean(errors.email1)}
+          infoType="email"
+          customer={customer}
+          errors={errors.email1}
+          handelSetCustomer={handelSetCustomer}
         />
       </div>
-
       <div className={classes.rows}>
-        <label className={classes.label}>Email 2 </label>
-
-        <TextField
+        <CustomerTextField
           name="email2"
           id="email2"
+          label="Email 2"
+          size="450px"
           value={customer.email.email2}
-          onChange={(event) => {
-            handelSetCustomer({
-              infoType: "email",
-              name: event.target.name,
-              value: event.target.value,
-            });
-          }}
-          InputProps={{ disableUnderline: true }}
-          className={classes.input}
-          helperText={errors.email2}
-          error={Boolean(errors.email2)}
+          infoType="email"
+          customer={customer}
+          errors={errors.email2}
+          handelSetCustomer={handelSetCustomer}
         />
       </div>
 
       <div className={classes.rows}>
-        <label className={classes.label}>Email 3 </label>
-
-        <TextField
+        <CustomerTextField
           name="email3"
           id="email3"
+          label="Email 3"
+          size="450px"
           value={customer.email.email3}
-          onChange={(event) => {
-            handelSetCustomer({
-              infoType: "email",
-              name: event.target.name,
-              value: event.target.value,
-            });
-          }}
-          InputProps={{ disableUnderline: true }}
-          className={classes.input}
-          helperText={errors.email3}
-          error={Boolean(errors.email3)}
+          infoType="email"
+          customer={customer}
+          errors={errors.email3}
+          handelSetCustomer={handelSetCustomer}
         />
       </div>
 
       <div className={classes.rows}>
-        <label className={classes.label}>remarks </label>
-
-        <TextField
+        <CustomerTextField
           name="remarks"
           id="remarks"
+          label="remarks"
+          size="450px"
           value={customer.email.remarks}
-          onChange={(event) => {
-            handelSetCustomer({
-              infoType: "email",
-              name: event.target.name,
-              value: event.target.value,
-            });
-          }}
-          InputProps={{ disableUnderline: true }}
-          className={classes.inputRemarks}
-          helperText={errors.remarks}
-          error={Boolean(errors.remarks)}
+          infoType="email"
+          customer={customer}
+          errors={errors.remarks}
+          handelSetCustomer={handelSetCustomer}
         />
       </div>
     </div>

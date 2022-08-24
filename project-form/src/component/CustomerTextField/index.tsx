@@ -10,19 +10,20 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     alignItems: "center",
   },
   input: {
-    width: "370px",
-    // gridColumn: ({ inputFieldWidth }) => inputFieldWidth,
+    // width: ({ inputFieldWidth }) => inputFieldWidth,
+    // width: "120px",
     border: "1px solid #000",
     borderRadius: "25px",
     height: "19px",
-    marginBottom: "9px",
+    marginTop: "8px",
+    marginBottom: "8px",
     paddingInline: "10px",
     backgroundColor: "white",
     "& .MuiInputBase-input": {
       padding: theme.spacing(0),
     },
     "& .MuiFormHelperText-root": {
-      marginTop: "-1px",
+      marginTop: "3px",
       lineHeight: "1",
       fontSize: "10px",
     },
@@ -41,6 +42,7 @@ interface CustomTextFieldProps {
   id: string;
   label: string;
   size: string;
+  value: String;
   infoType: string;
   errors: string;
   customer: addCustomerType;
@@ -55,6 +57,7 @@ const CustomerTextField = ({
   id,
   label,
   size,
+  value,
   infoType,
   errors,
   customer,
@@ -63,6 +66,7 @@ const CustomerTextField = ({
   const styleProps: StyleProps = {
     inputFieldWidth: size,
   };
+
   const classes = useStyles(styleProps);
 
   return (
@@ -71,6 +75,7 @@ const CustomerTextField = ({
       <TextField
         name={name}
         id={id}
+        value={value}
         onChange={(event) => {
           handelSetCustomer({
             infoType: infoType,
@@ -82,6 +87,7 @@ const CustomerTextField = ({
         className={classes.input}
         helperText={errors}
         error={Boolean(errors)}
+        style={{ width: size }}
       />
     </>
   );
