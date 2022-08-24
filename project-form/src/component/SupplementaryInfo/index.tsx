@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
   label: {
     gridColumn: "1",
-    width: "80px",
+    width: "90px",
     display: "inline-block",
     textAlign: "right",
     paddingRight: "10px",
@@ -392,7 +392,6 @@ const SupplementaryInfo = ({
         </div>
         <div className={classes.rows}>
           <label className={classes.label}>discount rate</label>
-
           <TextField
             name="customerFactor"
             id="customerFactor"
@@ -409,6 +408,7 @@ const SupplementaryInfo = ({
             helperText={errors.customerFactor}
             error={Boolean(errors.customerFactor)}
           />
+          %
         </div>
         <div className={classes.rows}>
           <label className={classes.labelNote}>discount rate memo</label>

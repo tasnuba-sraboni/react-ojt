@@ -6,9 +6,9 @@ import { ErrorType } from "..";
 
 const useStyles = makeStyles((theme) => ({
   emailInfo: {
-    backgroundColor: "#98FB98",
+    backgroundColor: "#D0FFBA",
     fontSize: "10px",
-    paddingTop: "10px",
+    padding: "10px 0 20px 0",
   },
   rows: {
     display: "grid",
@@ -27,23 +27,34 @@ const useStyles = makeStyles((theme) => ({
     gridColumn: "2/9",
     border: "1px solid #000",
     borderRadius: "25px",
-    margin: "2px",
+    height: "19px",
+    marginBottom: "9px",
     paddingInline: "10px",
     backgroundColor: "white",
     "& .MuiInputBase-input": {
       padding: theme.spacing(0),
+    },
+    "& .MuiFormHelperText-root": {
+      marginTop: "-1px",
+      lineHeight: "1",
+      fontSize: "10px",
     },
   },
   inputRemarks: {
     gridColumn: "2/9",
     border: "1px solid #000",
     borderRadius: "10px",
-    margin: "2px",
     height: "40px",
+    marginBottom: "9px",
     paddingInline: "10px",
     backgroundColor: "white",
     "& .MuiInputBase-input": {
       padding: theme.spacing(0),
+    },
+    "& .MuiFormHelperText-root": {
+      marginTop: "22px",
+      lineHeight: "1",
+      fontSize: "10px",
     },
   },
 }));

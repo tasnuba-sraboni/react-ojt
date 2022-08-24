@@ -16,19 +16,19 @@ const useStyles = makeStyles({
   },
   containerLeft: {
     display: "grid",
-    gridTemplateRows: "1fr 6fr",
+    gridTemplateRows: "1fr 8fr",
   },
   containerLeftTop: {},
   containerLeftBottom: {
     display: "grid",
-    gridTemplateRows: "4fr 2fr",
+    gridTemplateRows: "0.8fr 0.4fr",
     padding: "0 10px",
     paddingBottom: "10px",
-    backgroundColor: "#E0FFFF",
+    backgroundColor: "#CBFFF8",
   },
   containerRight: {
     display: "grid",
-    gridTemplateRows: "1fr 3fr 1fr",
+    gridTemplateRows: "0.8fr 3fr 1fr",
     gap: "10px",
   },
   containerRightTop: {
@@ -112,7 +112,6 @@ export type ErrorType = {
 const initialError: ErrorType = {
   customerCode: "",
   customerId: "",
-
   phoneNumber: "",
   yourName: "",
   title: "",
@@ -128,7 +127,6 @@ const initialError: ErrorType = {
   address4: "",
   companyName: "",
   departmentName: "",
-
   email1: "",
   email2: "",
   email3: "",
@@ -143,7 +141,7 @@ export type cutomerDetails = {
 
 const FormApp: React.FC = () => {
   const classes = useStyles();
-  const numericZero = "^[0][1][0-9]*$";
+  const numericHyphen = "^[0-9-]+$|^$";
   const numericInput = "^[1-9][0-9]*$";
   const emailInput =
     "^(([^<>()[]\\.,;:s@]+(.[^<>()[]\\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$";
@@ -151,6 +149,9 @@ const FormApp: React.FC = () => {
   const [customer, setCustomer] = React.useState<addCustomerType>(addCustomer);
   const [errors, setErrors] = React.useState<ErrorType>(initialError);
 
+  // ============================== Methods =========================
+
+  // stores data from form to state
   const handelSetCustomer = (cutomerDetails: cutomerDetails) => {
     setCustomer((prev) => {
       switch (cutomerDetails.infoType) {
@@ -205,9 +206,13 @@ const FormApp: React.FC = () => {
       "address4",
       "companyName",
       "departmentName",
+      "email1",
+      "email2",
+      "email3",
+      "remarks",
     ];
 
-    const emailValidationFields = ["email1", "email2", "email3"];
+    // const emailValidationFields = ["email1", "email2", "email3"];
 
     for (let key in copyErrors) {
       if (
@@ -221,68 +226,55 @@ const FormApp: React.FC = () => {
       }
     }
 
-    // for (let key in copyErrors) {
-    //   if (
-    //     emailValidationFields.includes(key) &&
-    //     customer.email[key as keyof typeof customer.email].match(emailInput)
-    //   ) {
-    //     copyErrors[key] = ``;
-    //   } else {
-    //     copyErrors[key] = "Not a valid email Id";
-    //     hasError = true;
-    //   }
-    // }
-
-    if (customer.basicInfo.phoneNumber.match(numericZero)) {
+    if (customer.basicInfo.phoneNumber.match(numericHyphen)) {
       copyErrors.phoneNumber = ``;
-    } else if (customer.basicInfo.phoneNumber.match(numericInput)) {
-      copyErrors.phoneNumber = "Not a valid phone number";
-      hasError = true;
-    } else if (customer.basicInfo.phoneNumber.length < 11) {
-      copyErrors.phoneNumber = "Not a valid phone number";
+    } else if (customer.basicInfo.phoneNumber === "") {
+      copyErrors.phoneNumber = "required";
       hasError = true;
     } else {
-      copyErrors.phoneNumber = "Numeric values only";
+      copyErrors.phoneNumber = "Invalid phone number";
       hasError = true;
     }
 
     if (customer.email.email1.match(emailInput)) {
       copyErrors.email1 = ``;
+    } else if (customer.email.email1 === "") {
+      copyErrors.email1 = "required";
+      hasError = true;
     } else {
-      copyErrors.email1 = "Not a valid email Id";
+      copyErrors.email1 = "Invalid email Id";
       hasError = true;
     }
 
-    // if (order.foodItem.length <= 3) {
-    //   copyErrors.foodItem = "Must contain at least 4 characters";
-    //   hasError = true;
-    // } else {
-    //   copyErrors.foodItem = ``;
-    // }
+    if (customer.email.email2 === "") {
+      copyErrors.email2 = "required";
+      hasError = true;
+    } else if (customer.email.email2.match(emailInput)) {
+      copyErrors.email2 = ``;
+    } else {
+      copyErrors.email2 = "Invalid email Id";
+      hasError = true;
+    }
 
-    // if (order.quantity.match(numericInput)) {
-    //   copyErrors.quantity = ``;
-    // } else if (order.quantity.match(numericZero)) {
-    //   copyErrors.quantity = "Value must not start with zero";
-    //   hasError = true;
-    // } else {
-    //   copyErrors.quantity = "Numeric values only";
-    //   hasError = true;
-    // }
-    // if (order.tableNo.match(numericInput)) {
-    //   copyErrors.tableNo = ``;
-    // } else if (order.tableNo.match(numericZero)) {
-    //   copyErrors.tableNo = "Value must not start with zero";
-    //   hasError = true;
-    // } else {
-    //   copyErrors.tableNo = "Numeric values only";
-    //   hasError = true;
-    // }
+    if (customer.email.email3 === "") {
+      copyErrors.email3 = "required";
+      hasError = true;
+    } else if (customer.email.email3.match(emailInput)) {
+      copyErrors.email3 = ``;
+    } else {
+      copyErrors.email3 = "Invalid email Id";
+      hasError = true;
+    }
+
+    if (customer.email.remarks === "") {
+      copyErrors.remarks = "required";
+      hasError = true;
+    } else {
+      copyErrors.email3 = ``;
+    }
 
     setErrors(copyErrors);
-    // setIsValid(!hasError);
-    console.log(hasError);
-
+    // console.log(hasError);
     return hasError;
   };
 
@@ -299,9 +291,7 @@ const FormApp: React.FC = () => {
           <div className={classes.containerLeftBottom}>
             <BasicInfo
               customer={customer}
-              setCustomer={setCustomer}
               errors={errors}
-              setErrors={setErrors}
               handelSetCustomer={handelSetCustomer}
             />
 
@@ -333,8 +323,9 @@ const FormApp: React.FC = () => {
               type="submit"
               onClick={(e) => {
                 e.preventDefault();
+                console.log(errors);
                 if (!isValid()) {
-                  console.log({ customer });
+                  console.log(customer);
                 }
               }}
             >

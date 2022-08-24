@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import { addCustomerType } from "..";
 import { cutomerDetails } from "..";
 import { ErrorType } from "..";
+import CustomerTextField from "../CustomerTextField";
 
 const useStyles = makeStyles((theme) => ({
   customer: {
@@ -40,22 +41,34 @@ const useStyles = makeStyles((theme) => ({
     gridColumn: "2/5",
     border: "1px solid #000",
     borderRadius: "25px",
-    margin: "2px",
+    height: "19px",
+    marginBottom: "9px",
     paddingInline: "10px",
     backgroundColor: "white",
     "& .MuiInputBase-input": {
       padding: theme.spacing(0),
+    },
+    "& .MuiFormHelperText-root": {
+      marginTop: "-1px",
+      lineHeight: "1",
+      fontSize: "10px",
     },
   },
   gridInputLarge: {
     gridColumn: "2/6",
     border: "1px solid #000",
     borderRadius: "25px",
-    margin: "2px",
+    height: "19px",
+    marginBottom: "9px",
     paddingInline: "10px",
     backgroundColor: "white",
     "& .MuiInputBase-input": {
       padding: theme.spacing(0),
+    },
+    "& .MuiFormHelperText-root": {
+      marginTop: "-1px",
+      lineHeight: "1",
+      fontSize: "10px",
     },
   },
 
@@ -87,84 +100,55 @@ const useStyles = makeStyles((theme) => ({
   input: {
     border: "1px solid #000",
     borderRadius: "25px",
-    margin: "2px",
-    height: "20px",
-    marginBottom: "10px",
+    height: "19px",
+    marginBottom: "9px",
     paddingInline: "10px",
     backgroundColor: "white",
     "& .MuiInputBase-input": {
       padding: theme.spacing(0),
     },
     "& .MuiFormHelperText-root": {
-      marginTop: "-3px",
+      marginTop: "-1px",
+      lineHeight: "1",
+      fontSize: "10px",
     },
   },
 }));
 
 type BasicInfoProps = {
   customer: addCustomerType;
-  setCustomer: React.Dispatch<React.SetStateAction<addCustomerType>>;
   errors: ErrorType;
-  setErrors: React.Dispatch<React.SetStateAction<ErrorType>>;
   handelSetCustomer: (cutomerDetails: cutomerDetails) => void;
 };
 
-const BasicInfo = ({
-  customer,
-  setCustomer,
-  errors,
-  setErrors,
-  handelSetCustomer,
-}: BasicInfoProps) => {
+const BasicInfo = ({ customer, errors, handelSetCustomer }: BasicInfoProps) => {
   const classes = useStyles();
 
   return (
     <div className={classes.customer}>
       <div className={classes.rows}>
-        <div className={classes.gridLabel}>
-          <label className={classes.label}>phone number </label>
-        </div>
-
-        <div className={classes.gridInput}>
-          <TextField
-            name="phoneNumber"
-            id="phoneNumber"
-            value={customer.basicInfo.phoneNumber}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "basicInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.phoneNumber}
-            error={Boolean(errors.phoneNumber)}
-          />
-        </div>
+        <CustomerTextField
+          name="phoneNumber"
+          id="phoneNumber"
+          label="phone number"
+          size="2/4"
+          infoType="basicInfo"
+          customer={customer}
+          errors={errors.phoneNumber}
+          handelSetCustomer={handelSetCustomer}
+        />
       </div>
       <div className={classes.rows}>
-        <div className={classes.gridLabel}>
-          <label className={classes.label}>Your name </label>
-        </div>
-        <div className={classes.gridInput}>
-          <TextField
-            name="yourName"
-            id="yourName"
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "basicInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.yourName}
-            error={Boolean(errors.yourName)}
-          />
-        </div>
+        <CustomerTextField
+          name="yourName"
+          id="yourName"
+          label="Your name"
+          size="2/4"
+          infoType="basicInfo"
+          customer={customer}
+          errors={errors.yourName}
+          handelSetCustomer={handelSetCustomer}
+        />
         <div className={classes.gridLabelMiddle}>
           <label className={classes.titleLabel}>title </label>
         </div>
@@ -172,6 +156,7 @@ const BasicInfo = ({
           <TextField
             name="title"
             id="title"
+            value={customer.basicInfo.title}
             onChange={(event) => {
               handelSetCustomer({
                 infoType: "basicInfo",
@@ -194,6 +179,7 @@ const BasicInfo = ({
           <TextField
             name="furigana"
             id="furigana"
+            value={customer.basicInfo.furigana}
             onChange={(event) => {
               handelSetCustomer({
                 infoType: "basicInfo",
@@ -217,6 +203,7 @@ const BasicInfo = ({
           <TextField
             name="t"
             id="t"
+            value={customer.basicInfo.t}
             onChange={(event) => {
               handelSetCustomer({
                 infoType: "basicInfo",
@@ -244,6 +231,7 @@ const BasicInfo = ({
           <TextField
             name="sortCode"
             id="sortCode"
+            value={customer.basicInfo.sortCode}
             onChange={(event) => {
               handelSetCustomer({
                 infoType: "basicInfo",
@@ -266,6 +254,7 @@ const BasicInfo = ({
           <TextField
             name="prefectures"
             id="prefectures"
+            value={customer.basicInfo.prefectures}
             onChange={(event) => {
               handelSetCustomer({
                 infoType: "basicInfo",
@@ -286,6 +275,7 @@ const BasicInfo = ({
           <TextField
             name="serviceLevel"
             id="serviceLevel"
+            value={customer.basicInfo.serviceLevel}
             onChange={(event) => {
               handelSetCustomer({
                 infoType: "basicInfo",
@@ -306,6 +296,7 @@ const BasicInfo = ({
         <TextField
           name="addressLine1"
           id="addressLine1"
+          value={customer.basicInfo.addressLine1}
           onChange={(event) => {
             handelSetCustomer({
               infoType: "basicInfo",
@@ -327,6 +318,7 @@ const BasicInfo = ({
           <TextField
             name="groupCode"
             id="groupCode"
+            value={customer.basicInfo.groupCode}
             onChange={(event) => {
               handelSetCustomer({
                 infoType: "basicInfo",
@@ -347,6 +339,7 @@ const BasicInfo = ({
         <TextField
           name="address2"
           id="address2"
+          value={customer.basicInfo.address2}
           onChange={(event) => {
             handelSetCustomer({
               infoType: "basicInfo",
@@ -365,6 +358,7 @@ const BasicInfo = ({
         <TextField
           name="address3"
           id="address3"
+          value={customer.basicInfo.address3}
           onChange={(event) => {
             handelSetCustomer({
               infoType: "basicInfo",
@@ -384,6 +378,7 @@ const BasicInfo = ({
         <TextField
           name="address4"
           id="address4"
+          value={customer.basicInfo.address4}
           onChange={(event) => {
             handelSetCustomer({
               infoType: "basicInfo",
@@ -403,6 +398,7 @@ const BasicInfo = ({
         <TextField
           name="companyName"
           id="companyName"
+          value={customer.basicInfo.companyName}
           onChange={(event) => {
             handelSetCustomer({
               infoType: "basicInfo",
@@ -423,6 +419,7 @@ const BasicInfo = ({
         <TextField
           name="departmentName"
           id="departmentName"
+          value={customer.basicInfo.departmentName}
           onChange={(event) => {
             handelSetCustomer({
               infoType: "basicInfo",
