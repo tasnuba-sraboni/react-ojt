@@ -1,3 +1,4 @@
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -125,6 +126,10 @@ const SupplementaryInfo = ({
   handelSetCustomer,
 }: SupplementaryInfoProps) => {
   const classes = useStyles();
+  const [checked, setChecked] = React.useState([true, false]);
+  const [selectedValue, setSelectedValue] = React.useState("don't want");
+  console.log(customer.supplementaryInfo);
+
   return (
     <>
       <div className={classes.blackInfo}>
@@ -319,11 +324,39 @@ const SupplementaryInfo = ({
         <b>Rejection management</b>
         <div className={classes.checkbox}>
           <FormControlLabel
-            control={<Checkbox size="small" name="checkbox1" color="primary" />}
+            control={
+              <Checkbox
+                size="small"
+                name="checkbox1"
+                color="primary"
+                value="do not send DM"
+                onChange={(event) => {
+                  handelSetCustomer({
+                    infoType: "supplementaryInfo",
+                    name: event.target.name,
+                    value: event.target.value,
+                  });
+                }}
+              />
+            }
             label="do not send DM"
           />
           <FormControlLabel
-            control={<Checkbox size="small" name="checkbox1" color="primary" />}
+            control={
+              <Checkbox
+                size="small"
+                name="checkbox2"
+                color="primary"
+                value="do not issue a purchase order"
+                onChange={(event) => {
+                  handelSetCustomer({
+                    infoType: "supplementaryInfo",
+                    name: event.target.name,
+                    value: event.target.value,
+                  });
+                }}
+              />
+            }
             label="do not issue a purchase order"
           />
         </div>
@@ -358,13 +391,42 @@ const SupplementaryInfo = ({
           <div className={classes.radioButton}>
             <RadioGroup>
               <FormControlLabel
+                name="receipt"
                 value="requirement"
-                control={<Radio size="small" color="primary" />}
+                control={
+                  <Radio
+                    size="small"
+                    color="primary"
+                    onChange={(event) => {
+                      setSelectedValue(event.target.value);
+                      handelSetCustomer({
+                        infoType: "supplementaryInfo",
+                        name: event.target.name,
+                        value: event.target.value,
+                      });
+                    }}
+                  />
+                }
                 label="Requirement"
               />
+
               <FormControlLabel
+                name="receipt"
                 value="dontwant"
-                control={<Radio size="small" color="primary" />}
+                control={
+                  <Radio
+                    size="small"
+                    color="primary"
+                    onChange={(event) => {
+                      setSelectedValue(event.target.value);
+                      handelSetCustomer({
+                        infoType: "supplementaryInfo",
+                        name: event.target.name,
+                        value: event.target.value,
+                      });
+                    }}
+                  />
+                }
                 label="don't want"
               />
             </RadioGroup>

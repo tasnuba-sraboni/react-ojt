@@ -75,6 +75,11 @@ export type addCustomerType = {
     email3: string;
     remarks: string;
   };
+  supplementaryInfo: {
+    checkbox1: string;
+    checkbox2: string;
+    receipt: string;
+  };
 };
 const addCustomer: addCustomerType = {
   customer: {
@@ -103,6 +108,11 @@ const addCustomer: addCustomerType = {
     email2: "",
     email3: "",
     remarks: "",
+  },
+  supplementaryInfo: {
+    checkbox1: "",
+    checkbox2: "",
+    receipt: "",
   },
 };
 
@@ -179,6 +189,14 @@ const FormApp: React.FC = () => {
               [cutomerDetails.name]: cutomerDetails.value,
             },
           };
+        case "supplementaryInfo":
+          return {
+            ...prev,
+            [cutomerDetails.infoType]: {
+              ...prev.supplementaryInfo,
+              [cutomerDetails.name]: cutomerDetails.value,
+            },
+          };
         default:
           return prev;
       }
@@ -226,13 +244,13 @@ const FormApp: React.FC = () => {
       }
     }
 
-    if (customer.basicInfo.phoneNumber.match(numericHyphen)) {
-      copyErrors.phoneNumber = ``;
-    } else if (customer.basicInfo.phoneNumber === "") {
-      copyErrors.phoneNumber = "required";
-      hasError = true;
-    } else {
+    if (!customer.basicInfo.phoneNumber.match(numericHyphen)) {
       copyErrors.phoneNumber = "Invalid phone number";
+      hasError = true;
+    }
+
+    if (!customer.basicInfo.t.match(numericHyphen)) {
+      copyErrors.t = "Invalid postal code";
       hasError = true;
     }
 
