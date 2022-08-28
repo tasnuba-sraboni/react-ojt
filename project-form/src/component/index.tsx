@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
   containerRight: {
     display: "grid",
-    gridTemplateRows: "0.8fr 3fr 1fr",
+    gridTemplateRows: "0.6fr 2.6fr 1.4fr",
     gap: "10px",
   },
   containerRightTop: {
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
   },
   containerRightBottom: {
     border: "1px solid #000",
-    paddingInline: "10px",
+    padding: "10px",
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
     // alignItems: "center",
@@ -76,6 +76,7 @@ export type addCustomerType = {
     remarks: string;
   };
   supplementaryInfo: {
+    gender: string;
     checkbox1: string;
     checkbox2: string;
     receipt: string;
@@ -110,6 +111,7 @@ const addCustomer: addCustomerType = {
     remarks: "",
   },
   supplementaryInfo: {
+    gender: "",
     checkbox1: "",
     checkbox2: "",
     receipt: "",
@@ -162,6 +164,7 @@ const FormApp: React.FC = () => {
   // ============================== Methods =========================
 
   // stores data from form to state
+
   const handelSetCustomer = (cutomerDetails: cutomerDetails) => {
     setCustomer((prev) => {
       switch (cutomerDetails.infoType) {

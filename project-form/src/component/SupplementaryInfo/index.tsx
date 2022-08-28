@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import Radio from "@material-ui/core/Radio";
@@ -10,6 +10,19 @@ import { cutomerDetails } from "..";
 import { ErrorType } from "..";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import SearchIcon from "@material-ui/icons/Search";
+import Modal from "@material-ui/core/Modal";
+import CloseIcon from "@material-ui/icons/Close";
+
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
 
 const useStyles = makeStyles((theme) => ({
   blackInfo: {
@@ -112,6 +125,21 @@ const useStyles = makeStyles((theme) => ({
     gridColumn: "1/6",
     paddingTop: "20px",
   },
+  paper: {
+    position: "absolute",
+    width: "250px",
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 2),
+  },
+  close: {
+    backgroundColor: "transparent",
+    border: 0,
+    position: "absolute",
+    right: "5%",
+    cursor: "pointer",
+  },
 }));
 
 type SupplementaryInfoProps = {
@@ -128,7 +156,19 @@ const SupplementaryInfo = ({
   const classes = useStyles();
   const [checked, setChecked] = React.useState([true, false]);
   const [selectedValue, setSelectedValue] = React.useState("don't want");
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
+  const [gender, setGender] = React.useState("");
+
   console.log(customer.supplementaryInfo);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <>
@@ -157,19 +197,87 @@ const SupplementaryInfo = ({
         <div className={classes.rows}>
           <label className={classes.label}>gender</label>
 
+          <Modal
+            open={open}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            <div style={modalStyle} className={classes.paper}>
+              <button className={classes.close} onClick={handleClose}>
+                <CloseIcon />
+              </button>
+
+              <h4 id="simple-modal-title">Select one</h4>
+              <div className={classes.radioButton}>
+                <RadioGroup>
+                  <FormControlLabel
+                    name="gender"
+                    value="Male"
+                    control={
+                      <Radio
+                        size="small"
+                        color="primary"
+                        onChange={(event) => {
+                          setGender(event.target.value);
+                          handelSetCustomer({
+                            infoType: "supplementaryInfo",
+                            name: event.target.name,
+                            value: event.target.value,
+                          });
+                        }}
+                      />
+                    }
+                    label="Male"
+                  />
+
+                  <FormControlLabel
+                    name="gender"
+                    value="Female"
+                    control={
+                      <Radio
+                        size="small"
+                        color="primary"
+                        onChange={(event) => {
+                          setGender(event.target.value);
+                          handelSetCustomer({
+                            infoType: "supplementaryInfo",
+                            name: event.target.name,
+                            value: event.target.value,
+                          });
+                        }}
+                      />
+                    }
+                    label="Female"
+                  />
+                  <FormControlLabel
+                    name="gender"
+                    value="Others"
+                    control={
+                      <Radio
+                        size="small"
+                        color="primary"
+                        onChange={(event) => {
+                          setGender(event.target.value);
+                          handelSetCustomer({
+                            infoType: "supplementaryInfo",
+                            name: event.target.name,
+                            value: event.target.value,
+                          });
+                        }}
+                      />
+                    }
+                    label="Others"
+                  />
+                </RadioGroup>
+              </div>
+            </div>
+          </Modal>
+
           <TextField
-            name="gender"
-            id="gender"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
+            onClick={handleOpen}
+            value={gender}
             InputProps={{ disableUnderline: true }}
-            className={classes.input}
+            className={classes.inputMedium}
             helperText={errors.gender}
             error={Boolean(errors.gender)}
           />

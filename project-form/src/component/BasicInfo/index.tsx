@@ -4,6 +4,7 @@ import { addCustomerType } from "..";
 import { cutomerDetails } from "..";
 import { ErrorType } from "..";
 import CustomerTextField from "../CustomerTextField";
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
   customer: {
@@ -32,6 +33,31 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     paddingTop: "2px",
   },
+  input: {
+    border: "1px solid #000",
+    borderRadius: "25px",
+    height: "19px",
+    width: "120px",
+    marginTop: "8px",
+    marginBottom: "8px",
+    paddingInline: "10px",
+    backgroundColor: "white",
+    "& .MuiInputBase-input": {
+      padding: theme.spacing(0),
+    },
+    "& .MuiFormHelperText-root": {
+      marginTop: "3px",
+      lineHeight: "1",
+      fontSize: "10px",
+    },
+  },
+  label: {
+    gridColumn: "1",
+    width: "75px",
+    display: "inline-block",
+    textAlign: "right",
+    paddingRight: "10px",
+  },
 }));
 
 type BasicInfoProps = {
@@ -42,11 +68,40 @@ type BasicInfoProps = {
 
 const BasicInfo = ({ customer, errors, handelSetCustomer }: BasicInfoProps) => {
   const classes = useStyles();
+  const numericHyphen = "^[0-9-]+$|^$";
 
   return (
     <div className={classes.customer}>
       <div className={classes.rows}>
-        <CustomerTextField
+        <label className={classes.label}>phone number</label>
+        <TextField
+          name="phoneNumber"
+          id="phoneNumber"
+          value={customer.basicInfo.phoneNumber}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            if (!event.target.value.match(numericHyphen)) {
+              errors.phoneNumber = "Digits and hyphen only";
+              handelSetCustomer({
+                infoType: "supplementaryInfo",
+                name: event.target.name,
+                value: "",
+              });
+            } else {
+              errors.phoneNumber = "";
+              handelSetCustomer({
+                infoType: "supplementaryInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }
+          }}
+          InputProps={{ disableUnderline: true }}
+          className={classes.input}
+          helperText={errors.phoneNumber}
+          error={Boolean(errors.phoneNumber)}
+        />
+
+        {/* <CustomerTextField
           name="phoneNumber"
           id="phoneNumber"
           label="phone number"
@@ -55,8 +110,13 @@ const BasicInfo = ({ customer, errors, handelSetCustomer }: BasicInfoProps) => {
           infoType="basicInfo"
           customer={customer}
           errors={errors.phoneNumber}
-          handelSetCustomer={handelSetCustomer}
-        />
+          handelSetCustomer={(event) => {
+            if (!event.target.value.match(numericHyphen)) {
+              errors.phoneNumber = "Must be digits and hyphen";
+            }
+            handelSetCustomer;
+          }}
+        /> */}
       </div>
       <div className={classes.rows}>
         <CustomerTextField
