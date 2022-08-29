@@ -100,23 +100,6 @@ const BasicInfo = ({ customer, errors, handelSetCustomer }: BasicInfoProps) => {
           helperText={errors.phoneNumber}
           error={Boolean(errors.phoneNumber)}
         />
-
-        {/* <CustomerTextField
-          name="phoneNumber"
-          id="phoneNumber"
-          label="phone number"
-          size="120px"
-          value={customer.basicInfo.phoneNumber}
-          infoType="basicInfo"
-          customer={customer}
-          errors={errors.phoneNumber}
-          handelSetCustomer={(event) => {
-            if (!event.target.value.match(numericHyphen)) {
-              errors.phoneNumber = "Must be digits and hyphen";
-            }
-            handelSetCustomer;
-          }}
-        /> */}
       </div>
       <div className={classes.rows}>
         <CustomerTextField

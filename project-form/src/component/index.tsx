@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
   containerRight: {
     display: "grid",
-    gridTemplateRows: "0.6fr 2.6fr 1.4fr",
+    gridTemplateRows: "0.6fr 2.7fr 1.3fr",
     gap: "10px",
   },
   containerRightTop: {
@@ -76,7 +76,15 @@ export type addCustomerType = {
     remarks: string;
   };
   supplementaryInfo: {
+    regionCode: string;
     gender: string;
+    age: string;
+    customerFactor: string;
+    classificationCode: string;
+    orderCategory: string;
+    collectionMethod: string;
+    lastStoreCD: string;
+    customerRank: string;
     checkbox1: string;
     checkbox2: string;
     receipt: string;
@@ -112,7 +120,15 @@ const addCustomer: addCustomerType = {
     remarks: "",
   },
   supplementaryInfo: {
+    regionCode: "",
     gender: "",
+    age: "",
+    customerFactor: "",
+    classificationCode: "",
+    orderCategory: "",
+    collectionMethod: "",
+    lastStoreCD: "",
+    customerRank: "",
     checkbox1: "",
     checkbox2: "",
     receipt: "",

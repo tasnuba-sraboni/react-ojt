@@ -12,6 +12,7 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import SearchIcon from "@material-ui/icons/Search";
 import Modal from "@material-ui/core/Modal";
 import CloseIcon from "@material-ui/icons/Close";
+import CustomerTextField from "../CustomerTextField";
 
 function getModalStyle() {
   const top = 50;
@@ -201,23 +202,17 @@ const SupplementaryInfo = ({
       <div className={classes.blackInfo}>
         <b>Customer Supplementary information</b>
         <div className={classes.rows}>
-          <label className={classes.label}>region code</label>
-
-          <TextField
+          <CustomerTextField
             name="regionCode"
             id="regionCode"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.inputMedium}
-            helperText={errors.regionCode}
-            error={Boolean(errors.regionCode)}
+            label="region code"
+            size="85px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.regionCode}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.regionCode}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.rows}>
@@ -302,28 +297,21 @@ const SupplementaryInfo = ({
           />
         </div>
         <div className={classes.rows}>
-          <label className={classes.label}>age</label>
-
-          <TextField
+          <CustomerTextField
             name="age"
             id="age"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.inputLarge}
-            helperText={errors.age}
-            error={Boolean(errors.age)}
+            label="age"
+            size="110px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.age}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.age}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.rows}>
           <label className={classes.label}>Customer factor</label>
-
           <TextField
             name="customerFactor"
             id="customerFactor"

@@ -42,6 +42,7 @@ interface CustomTextFieldProps {
   id: string;
   label: string;
   size: string;
+  labelWidth?: string;
   value: String;
   infoType: string;
   errors: string;
@@ -57,6 +58,7 @@ const CustomerTextField = ({
   id,
   label,
   size,
+  labelWidth,
   value,
   infoType,
   errors,
@@ -71,7 +73,9 @@ const CustomerTextField = ({
 
   return (
     <>
-      <label className={classes.label}>{label} </label>
+      <label style={{ width: labelWidth }} className={classes.label}>
+        {label}
+      </label>
       <TextField
         name={name}
         id={id}
