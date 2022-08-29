@@ -82,14 +82,14 @@ const BasicInfo = ({ customer, errors, handelSetCustomer }: BasicInfoProps) => {
             if (!event.target.value.match(numericHyphen)) {
               errors.phoneNumber = "Digits and hyphen only";
               handelSetCustomer({
-                infoType: "supplementaryInfo",
+                infoType: "basicInfo",
                 name: event.target.name,
                 value: "",
               });
             } else {
               errors.phoneNumber = "";
               handelSetCustomer({
-                infoType: "supplementaryInfo",
+                infoType: "basicInfo",
                 name: event.target.name,
                 value: event.target.value,
               });
@@ -159,7 +159,34 @@ const BasicInfo = ({ customer, errors, handelSetCustomer }: BasicInfoProps) => {
       </div>
 
       <div className={classes.rows}>
-        <CustomerTextField
+        <label className={classes.label}>T</label>
+        <TextField
+          name="t"
+          id="t"
+          value={customer.basicInfo.t}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            if (!event.target.value.match(numericHyphen)) {
+              errors.t = "Digits and hyphen only";
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: "",
+              });
+            } else {
+              errors.t = "";
+              handelSetCustomer({
+                infoType: "basicInfo",
+                name: event.target.name,
+                value: event.target.value,
+              });
+            }
+          }}
+          InputProps={{ disableUnderline: true }}
+          className={classes.input}
+          helperText={errors.t}
+          error={Boolean(errors.t)}
+        />
+        {/* <CustomerTextField
           name="t"
           id="t"
           label="T"
@@ -169,7 +196,7 @@ const BasicInfo = ({ customer, errors, handelSetCustomer }: BasicInfoProps) => {
           customer={customer}
           errors={errors.t}
           handelSetCustomer={handelSetCustomer}
-        />
+        /> */}
 
         <button className={classes.searchIcon}>
           <SearchIcon fontSize="inherit" />

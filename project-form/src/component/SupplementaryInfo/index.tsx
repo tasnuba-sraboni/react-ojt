@@ -70,6 +70,24 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(0),
     },
   },
+  discountInput: {
+    border: "1px solid #000",
+    borderRadius: "25px",
+    height: "19px",
+    width: "70px",
+    margin: "8px 2px",
+    paddingInline: "10px",
+    backgroundColor: "white",
+    "& .MuiInputBase-input": {
+      padding: theme.spacing(0),
+    },
+    "& .MuiFormHelperText-root": {
+      marginTop: "-15px",
+      marginLeft: "100px",
+      lineHeight: "1",
+      fontSize: "10px",
+    },
+  },
   inputLarge: {
     gridColumn: "2/6",
     border: "1px solid #000",
@@ -154,6 +172,7 @@ const SupplementaryInfo = ({
   handelSetCustomer,
 }: SupplementaryInfoProps) => {
   const classes = useStyles();
+  const numericDecimal = "^([0-9]+.?[0-9]*|.[0-9]+)$";
   const [checked, setChecked] = React.useState([true, false]);
   const [selectedValue, setSelectedValue] = React.useState("don't want");
   const [modalStyle] = React.useState(getModalStyle);
@@ -168,6 +187,13 @@ const SupplementaryInfo = ({
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleSet = (e: React.FormEvent<HTMLFormElement>) => {
+    handelSetCustomer({
+      infoType: "supplementaryInfo",
+      name: "gender",
+      value: gender,
+    });
   };
 
   return (
@@ -196,86 +222,79 @@ const SupplementaryInfo = ({
         </div>
         <div className={classes.rows}>
           <label className={classes.label}>gender</label>
-
           <Modal
             open={open}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
           >
             <div style={modalStyle} className={classes.paper}>
-              <button className={classes.close} onClick={handleClose}>
-                <CloseIcon />
-              </button>
+              <form
+                onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+                  e.preventDefault();
+                  handleSet(e);
+                  handleClose();
+                }}
+              >
+                <button className={classes.close} onClick={handleClose}>
+                  <CloseIcon />
+                </button>
 
-              <h4 id="simple-modal-title">Select one</h4>
-              <div className={classes.radioButton}>
-                <RadioGroup>
-                  <FormControlLabel
-                    name="gender"
-                    value="Male"
-                    control={
-                      <Radio
-                        size="small"
-                        color="primary"
-                        onChange={(event) => {
-                          setGender(event.target.value);
-                          handelSetCustomer({
-                            infoType: "supplementaryInfo",
-                            name: event.target.name,
-                            value: event.target.value,
-                          });
-                        }}
-                      />
-                    }
-                    label="Male"
-                  />
+                <h4 id="simple-modal-title">Select one</h4>
+                <div className={classes.radioButton}>
+                  <RadioGroup>
+                    <FormControlLabel
+                      name="gender"
+                      value="Male"
+                      control={
+                        <Radio
+                          size="small"
+                          color="primary"
+                          onChange={(event) => {
+                            setGender(event.target.value);
+                          }}
+                        />
+                      }
+                      label="Male"
+                    />
 
-                  <FormControlLabel
-                    name="gender"
-                    value="Female"
-                    control={
-                      <Radio
-                        size="small"
-                        color="primary"
-                        onChange={(event) => {
-                          setGender(event.target.value);
-                          handelSetCustomer({
-                            infoType: "supplementaryInfo",
-                            name: event.target.name,
-                            value: event.target.value,
-                          });
-                        }}
-                      />
-                    }
-                    label="Female"
-                  />
-                  <FormControlLabel
-                    name="gender"
-                    value="Others"
-                    control={
-                      <Radio
-                        size="small"
-                        color="primary"
-                        onChange={(event) => {
-                          setGender(event.target.value);
-                          handelSetCustomer({
-                            infoType: "supplementaryInfo",
-                            name: event.target.name,
-                            value: event.target.value,
-                          });
-                        }}
-                      />
-                    }
-                    label="Others"
-                  />
-                </RadioGroup>
-              </div>
+                    <FormControlLabel
+                      name="gender"
+                      value="Female"
+                      control={
+                        <Radio
+                          size="small"
+                          color="primary"
+                          onChange={(event) => {
+                            setGender(event.target.value);
+                          }}
+                        />
+                      }
+                      label="Female"
+                    />
+                    <FormControlLabel
+                      name="gender"
+                      value="Others"
+                      control={
+                        <Radio
+                          size="small"
+                          color="primary"
+                          onChange={(event) => {
+                            setGender(event.target.value);
+                          }}
+                        />
+                      }
+                      label="Others"
+                    />
+                  </RadioGroup>
+                </div>
+                <button type="submit">Submit </button>
+              </form>
             </div>
           </Modal>
 
           <TextField
             onClick={handleOpen}
-            value={gender}
+            value={customer.supplementaryInfo.gender}
             InputProps={{ disableUnderline: true }}
             className={classes.inputMedium}
             helperText={errors.gender}
@@ -563,20 +582,30 @@ const SupplementaryInfo = ({
         <div className={classes.rows}>
           <label className={classes.label}>discount rate</label>
           <TextField
-            name="customerFactor"
-            id="customerFactor"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
+            name="discountRate"
+            id="discountRate"
+            value={customer.supplementaryInfo.discountRate}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              if (!event.target.value.match(numericDecimal)) {
+                errors.discountRate = "Digits and decimal point only";
+                handelSetCustomer({
+                  infoType: "supplementaryInfo",
+                  name: event.target.name,
+                  value: "",
+                });
+              } else {
+                errors.discountRate = "";
+                handelSetCustomer({
+                  infoType: "supplementaryInfo",
+                  name: event.target.name,
+                  value: event.target.value,
+                });
+              }
             }}
             InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.customerFactor}
-            error={Boolean(errors.customerFactor)}
+            className={classes.discountInput}
+            helperText={errors.discountRate}
+            error={Boolean(errors.discountRate)}
           />
           %
         </div>

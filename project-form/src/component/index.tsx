@@ -80,6 +80,7 @@ export type addCustomerType = {
     checkbox1: string;
     checkbox2: string;
     receipt: string;
+    discountRate: string;
   };
 };
 const addCustomer: addCustomerType = {
@@ -115,6 +116,7 @@ const addCustomer: addCustomerType = {
     checkbox1: "",
     checkbox2: "",
     receipt: "",
+    discountRate: "",
   },
 };
 
@@ -143,6 +145,7 @@ const initialError: ErrorType = {
   email2: "",
   email3: "",
   remarks: "",
+  discountRate: "",
 };
 
 export type cutomerDetails = {
