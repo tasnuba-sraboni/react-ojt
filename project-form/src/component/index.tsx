@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
   containerRight: {
     display: "grid",
-    gridTemplateRows: "0.6fr 2.7fr 1.3fr",
+    gridTemplateRows: "0.6fr 2.7fr 0.3fr",
     gap: "10px",
   },
   containerRightTop: {
@@ -51,6 +51,7 @@ export type addCustomerType = {
   customer: {
     customerCode?: string;
     customerId?: string;
+    customerType?: string;
   };
   basicInfo: {
     phoneNumber: string;
@@ -105,6 +106,7 @@ const addCustomer: addCustomerType = {
   customer: {
     customerCode: "",
     customerId: "",
+    customerType: "",
   },
   basicInfo: {
     phoneNumber: "",
@@ -272,8 +274,6 @@ const FormApp: React.FC = () => {
       "remarks",
     ];
 
-    // const emailValidationFields = ["email1", "email2", "email3"];
-
     for (let key in copyErrors) {
       if (
         validationFields.includes(key) &&
@@ -346,7 +346,11 @@ const FormApp: React.FC = () => {
       <form className={classes.container}>
         <div className={classes.containerLeft}>
           <div className={classes.containerLeftTop}>
-            <Customer />
+            <Customer
+              customer={customer}
+              errors={errors}
+              handelSetCustomer={handelSetCustomer}
+            />
           </div>
           <div className={classes.containerLeftBottom}>
             <BasicInfo
@@ -358,6 +362,7 @@ const FormApp: React.FC = () => {
             <Email
               customer={customer}
               errors={errors}
+              setErrors={setErrors}
               handelSetCustomer={handelSetCustomer}
             />
           </div>

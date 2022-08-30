@@ -180,7 +180,7 @@ const SupplementaryInfo = ({
   const [open, setOpen] = React.useState(false);
   const [gender, setGender] = React.useState("");
 
-  console.log(customer.supplementaryInfo);
+  // console.log(customer.supplementaryInfo);
 
   const handleOpen = () => {
     setOpen(true);
@@ -577,7 +577,7 @@ const SupplementaryInfo = ({
             id="closingDateClassification"
             label="Closing date classification"
             size="40px"
-            labelWidth="115px"
+            labelWidth="90px"
             value={customer.supplementaryInfo.closingDateClassification}
             infoType="supplementaryInfo"
             customer={customer}
