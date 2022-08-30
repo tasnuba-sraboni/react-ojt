@@ -301,7 +301,7 @@ const SupplementaryInfo = ({
             name="age"
             id="age"
             label="age"
-            size="110px"
+            size="170px"
             labelWidth="90px"
             value={customer.supplementaryInfo.age}
             infoType="supplementaryInfo"
@@ -311,122 +311,87 @@ const SupplementaryInfo = ({
           />
         </div>
         <div className={classes.rows}>
-          <label className={classes.label}>Customer factor</label>
-          <TextField
+          <CustomerTextField
             name="customerFactor"
             id="customerFactor"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.customerFactor}
-            error={Boolean(errors.customerFactor)}
+            label="Customer factor"
+            size="40px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.customerFactor}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.customerFactor}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.rows}>
-          <label className={classes.labelNote}>Classification code</label>
-
-          <TextField
-            name="customerFactor"
-            id="customerFactor"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.customerFactor}
-            error={Boolean(errors.customerFactor)}
+          <CustomerTextField
+            name="classificationCode"
+            id="classificationCode"
+            label="Classification Code"
+            size="40px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.classificationCode}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.classificationCode}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.rows}>
-          <label className={classes.label}>Order category</label>
-
-          <TextField
-            name="customerFactor"
-            id="customerFactor"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.customerFactor}
-            error={Boolean(errors.customerFactor)}
+          <CustomerTextField
+            name="orderCategory"
+            id="orderCategory"
+            label="Order category"
+            size="40px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.orderCategory}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.orderCategory}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.rows}>
-          <label className={classes.labelNote}>Collection method</label>
-
-          <TextField
-            name="customerFactor"
-            id="customerFactor"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.customerFactor}
-            error={Boolean(errors.customerFactor)}
+          <CustomerTextField
+            name="collectionMethod"
+            id="collectionMethod"
+            label="Collection method"
+            size="40px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.collectionMethod}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.collectionMethod}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.rows}>
-          <label className={classes.label}>Last store CD</label>
-
-          <TextField
-            name="customerFactor"
-            id="customerFactor"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.customerFactor}
-            error={Boolean(errors.customerFactor)}
+          <CustomerTextField
+            name="lastStoreCD"
+            id="lastStoreCD"
+            label="Last store CD"
+            size="40px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.lastStoreCD}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.lastStoreCD}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.rows}>
-          <label className={classes.label}>customer rank</label>
-
-          <TextField
-            name="customerFactor"
-            id="customerFactor"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.customerFactor}
-            error={Boolean(errors.customerFactor)}
+          <CustomerTextField
+            name="customerRank"
+            id="customerRank"
+            label="customer rank"
+            size="40px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.customerRank}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.customerRank}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.rows}>
@@ -479,23 +444,17 @@ const SupplementaryInfo = ({
       </div>
       <div className={classes.blackInfo}>
         <div className={classes.rows}>
-          <label className={classes.label}>requester</label>
-
-          <TextField
-            name="regionCode"
-            id="regionCode"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.inputMedium}
-            helperText={errors.regionCode}
-            error={Boolean(errors.regionCode)}
+          <CustomerTextField
+            name="requester"
+            id="requester"
+            label="requester"
+            size="85px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.requester}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.requester}
+            handelSetCustomer={handelSetCustomer}
           />
           <button className={classes.searchIcon}>
             <SearchIcon fontSize="inherit" />
@@ -548,23 +507,17 @@ const SupplementaryInfo = ({
           </div>
         </div>
         <div className={classes.rows}>
-          <label className={classes.label}>Receipt address</label>
-
-          <TextField
-            name="age"
-            id="age"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.inputMedium}
-            helperText={errors.age}
-            error={Boolean(errors.age)}
+          <CustomerTextField
+            name="receiptAddress"
+            id="receiptAddress"
+            label="Receipt address"
+            size="85px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.receiptAddress}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.receiptAddress}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.rows}>
@@ -605,144 +558,101 @@ const SupplementaryInfo = ({
           </button>
         </div>
         <div className={classes.rows}>
-          <label className={classes.labelNote}>Urge to distinguish</label>
-
-          <TextField
-            name="customerFactor"
-            id="customerFactor"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.customerFactor}
-            error={Boolean(errors.customerFactor)}
+          <CustomerTextField
+            name="urgeToDistinguish"
+            id="urgeToDistinguish"
+            label="Urge to distinguish"
+            size="40px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.urgeToDistinguish}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.urgeToDistinguish}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.rows}>
-          <label className={classes.labelNote}>
-            Closing date classification
-          </label>
-
-          <TextField
-            name="customerFactor"
-            id="customerFactor"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.customerFactor}
-            error={Boolean(errors.customerFactor)}
+          <CustomerTextField
+            name="closingDateClassification"
+            id="closingDateClassification"
+            label="Closing date classification"
+            size="40px"
+            labelWidth="115px"
+            value={customer.supplementaryInfo.closingDateClassification}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.closingDateClassification}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.rows}>
-          <label className={classes.labelNote}>Customer generic 1</label>
-
-          <TextField
-            name="customerFactor"
-            id="customerFactor"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.customerFactor}
-            error={Boolean(errors.customerFactor)}
+          <CustomerTextField
+            name="customerGeneric1"
+            id="customerGeneric1"
+            label="Customer generic 1"
+            size="40px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.customerGeneric1}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.customerGeneric1}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.rows}>
-          <label className={classes.labelNote}>Customer generic 2</label>
-
-          <TextField
-            name="customerFactor"
-            id="customerFactor"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.customerFactor}
-            error={Boolean(errors.customerFactor)}
+          <CustomerTextField
+            name="customerGeneric2"
+            id="customerGeneric2"
+            label="Customer generic 2"
+            size="40px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.customerGeneric2}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.customerGeneric2}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.rows}>
-          <label className={classes.labelNote}>Customer generic 3</label>
-
-          <TextField
-            name="customerFactor"
-            id="customerFactor"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.customerFactor}
-            error={Boolean(errors.customerFactor)}
+          <CustomerTextField
+            name="customerGeneric3"
+            id="customerGeneric3"
+            label="Customer generic 3"
+            size="40px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.customerGeneric3}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.customerGeneric3}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.rows}>
-          <label className={classes.labelNote}>Customer generic 4</label>
-
-          <TextField
-            name="customerFactor"
-            id="customerFactor"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.customerFactor}
-            error={Boolean(errors.customerFactor)}
+          <CustomerTextField
+            name="customerGeneric4"
+            id="customerGeneric4"
+            label="Customer generic 4"
+            size="40px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.customerGeneric4}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.customerGeneric4}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.rows}>
-          <label className={classes.labelNote}>Customer generic 5</label>
-          <TextField
-            name="customerFactor"
-            id="customerFactor"
-            //   value={customer.blackInfo.blackInformation}
-            onChange={(event) => {
-              handelSetCustomer({
-                infoType: "supplementaryInfo",
-                name: event.target.name,
-                value: event.target.value,
-              });
-            }}
-            InputProps={{ disableUnderline: true }}
-            className={classes.input}
-            helperText={errors.customerFactor}
-            error={Boolean(errors.customerFactor)}
+          <CustomerTextField
+            name="customerGeneric5"
+            id="customerGeneric5"
+            label="Customer generic 5"
+            size="40px"
+            labelWidth="90px"
+            value={customer.supplementaryInfo.customerGeneric5}
+            infoType="supplementaryInfo"
+            customer={customer}
+            errors={errors.customerGeneric5}
+            handelSetCustomer={handelSetCustomer}
           />
         </div>
         <div className={classes.registration}>registration date 17-08-22</div>

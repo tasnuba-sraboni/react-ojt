@@ -16,12 +16,12 @@ const useStyles = makeStyles({
   },
   containerLeft: {
     display: "grid",
-    gridTemplateRows: "1fr 8fr",
+    gridTemplateRows: "1fr 8.5fr",
   },
   containerLeftTop: {},
   containerLeftBottom: {
     display: "grid",
-    gridTemplateRows: "0.8fr 0.4fr",
+    gridTemplateRows: "0.6fr 0.2fr",
     padding: "0 10px",
     paddingBottom: "10px",
     backgroundColor: "#CBFFF8",
@@ -87,8 +87,18 @@ export type addCustomerType = {
     customerRank: string;
     checkbox1: string;
     checkbox2: string;
+    requester: string;
     receipt: string;
+    receiptAddress: string;
     discountRate: string;
+    discountRateMemo: string;
+    urgeToDistinguish: string;
+    closingDateClassification: string;
+    customerGeneric1: string;
+    customerGeneric2: string;
+    customerGeneric3: string;
+    customerGeneric4: string;
+    customerGeneric5: string;
   };
 };
 const addCustomer: addCustomerType = {
@@ -131,8 +141,18 @@ const addCustomer: addCustomerType = {
     customerRank: "",
     checkbox1: "",
     checkbox2: "",
+    requester: "",
     receipt: "",
+    receiptAddress: "",
     discountRate: "",
+    discountRateMemo: "",
+    urgeToDistinguish: "",
+    closingDateClassification: "",
+    customerGeneric1: "",
+    customerGeneric2: "",
+    customerGeneric3: "",
+    customerGeneric4: "",
+    customerGeneric5: "",
   },
 };
 
